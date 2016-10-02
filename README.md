@@ -35,7 +35,7 @@ Implementation
 
 > **Note**
 
-> For this project, make sure your you build the solution first before opening the sample form. Otherwise, you may get designer errors.
+> For this project, make sure you build the solution first before opening the sample form. Otherwise, you may get designer errors.
 
 License
 --------
