@@ -31,7 +31,7 @@ Requirements
 
 Implementation
 --------------
-`XRails Controls.cs` and `Font Loader.cs` are all you need to add to your project and the custom controls should show up in your toolbox after rebuilding  the solution. You could also compile the two class files as a single .dll and use it in VB.NET.
+`XRails Controls.cs` and `Font Loader.cs` are all you need to add to your project and the custom controls should show up in your toolbox after rebuilding  the solution. You could also compile the two class files into a single .dll and use it in VB.NET.
 
 > **Note**
 
