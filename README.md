@@ -29,6 +29,10 @@ Requirements
 * <kbd>[.NET Framework 2.0](https://www.microsoft.com/en-ca/download/details.aspx?id=1639)</kbd> or above.
 * <kbd>[Animator](https://github.com/PavelTorgashov/Animator)</kbd> only if you want to animate the controls on the form. Not required by XRails itself.
 
+Implementation
+--------------
+`XRails Controls.cs` and `Font Loader.cs` is all you need to add to your project and the custom controls should show up in your toolbox after rebuilding  the solution. You could also compile the two class files as a single .dll and use it in VB.NET.
+
 License
 --------
 This project is distributed under the [MIT License](https://opensource.org/licenses/MIT)
