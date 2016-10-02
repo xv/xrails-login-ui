@@ -15,6 +15,7 @@ namespace XRails
             try
             {
                 // Add a font provided by the client application without installing it
+                // SNIPPET CREDIT: Shibumi
                 fontCollection = new PrivateFontCollection();
                 int fontLength = Properties.Resources.Raleway_Light.Length;
                 byte[] fontData = Properties.Resources.Raleway_Light;
