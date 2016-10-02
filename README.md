@@ -33,6 +33,10 @@ Implementation
 --------------
 `XRails Controls.cs` and `Font Loader.cs` is all you need to add to your project and the custom controls should show up in your toolbox after rebuilding  the solution. You could also compile the two class files as a single .dll and use it in VB.NET.
 
+> **Note**
+
+> For this project, make sure your you build the solution first before opening the sample form. Otherwise, you may get designer errors.
+
 License
 --------
 This project is distributed under the [MIT License](https://opensource.org/licenses/MIT)
