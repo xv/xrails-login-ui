@@ -37,7 +37,7 @@ If you are creating a new ClassLibrary project to compile XRails as a .dll, make
 * <kbd>System.Drawing</kbd>
 * <kbd>System.Windows.Forms</kbd>
 
-> **Note**
+> **Important**
 
 > For this project, make sure you build the solution first before opening the sample form. Otherwise, you may get designer errors.
 
