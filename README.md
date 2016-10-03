@@ -5,7 +5,7 @@ This project was heavily inspired by a concept design called "Simply Login" [I f
 ----------
 
 <p align="center">
-  <img src ="http://i.imgur.com/1P7VwjA.png" />
+  <img src ="http://i.imgur.com/zNqEHrL.png" />
 </p>
 
 Supported Controls
