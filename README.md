@@ -41,6 +41,12 @@ If you are creating a new ClassLibrary project to compile XRails as a .dll, make
 
 > For this project, make sure you build the solution first before opening the sample form. Otherwise, you may get designer errors.
 
+Contact
+-------
+Your love letters &nbsp;&nbsp;&nbsp;> hello@exr.be
+<br/>
+Tweet me maybe?   > [Phrixua](https://twitter.com/Phrixua)
+
 Legal
 -----
 This project is distributed under the terms of the [MIT License](https://opensource.org/licenses/MIT)
