@@ -43,4 +43,4 @@ If you are creating a new ClassLibrary project to compile XRails as a .dll, make
 
 Legal
 -----
-This project is distributed under the [MIT License](https://opensource.org/licenses/MIT)
+This project is distributed under the terms of the [MIT License](https://opensource.org/licenses/MIT)
