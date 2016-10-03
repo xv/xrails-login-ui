@@ -297,7 +297,7 @@ namespace XRails
             set
             {
                 _Image = value;
-                if (value != null) { _ImageSize = Size.Empty; }
+                if (value == null) { _ImageSize = Size.Empty; }
                 else               { _ImageSize = value.Size; }
 
                 if (Image != null) { XRailsTB.Location = new Point(24, 14); }
