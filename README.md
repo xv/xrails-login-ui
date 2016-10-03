@@ -8,7 +8,7 @@ This project was heavily inspired by a concept design called "Simply Login" [I f
   <img src ="http://i.imgur.com/S2JGkGp.png" />
 </p>
 
-Supported Controls
+Available Controls
 ------------------
 Control           | Inherits   | Interface       | Animated | Custom Properties
 ------------------|------------|-----------------|----------|-------------------
