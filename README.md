@@ -1,4 +1,4 @@
-Synopsis
+Synopsis :scroll:
 ========
 This project was heavily inspired by a concept design called "Simply Login" [I found on Dribbble](https://dribbble.com/shots/1892468-simply-login). It was made possible for WinForms by designing a bunch of custom, fully functional controls with GDI+ and cramming them into one form to produce this excellent result. Eye candy, eh?
 
