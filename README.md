@@ -22,7 +22,7 @@ XRails_Button     | Control    | IButtonControl  | YES      | YES
 
 > **Note**
 
-> XRails_TitleLabel uses a user-defined font called <i>Raleway-Light</i>. It needs to be initialized on the form that is using the label. See the code of the sample form provided in the project for more information.
+> `XRails_TitleLabel` control uses a user-defined font called `Raleway-Light`. It needs to be initialized on the form that is using the label. See the code of the sample form provided in the project for more information.
 
 Requirements
 ------------
