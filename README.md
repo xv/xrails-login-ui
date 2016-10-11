@@ -45,7 +45,7 @@ Contact
 -------
 Your love letters &nbsp;&nbsp;&nbsp;> hello@exr.be
 <br/>
-Tweet me maybe?   > [phrixua](https://twitter.com/phrixua)
+Tweet me maybe?   > [0x141](https://twitter.com/0x141)
 
 Legal
 -----
