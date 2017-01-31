@@ -36,26 +36,26 @@ namespace XRails
         {
             /// <summary>
             /// Loads the specified cursor resource from the executable (.EXE) file
-            /// associated with an application instance
+            /// associated with an application instance.
             /// </summary>
             ///
             /// <param name="hInstance">
             /// A handle to an instance of the module whose executable file contains the
-            /// cursor to be loaded
+            /// cursor to be loaded.
             /// </param>
             ///
             /// <param name="lpCursorName">
-            /// The name of the cursor resource to be loaded
+            /// The name of the cursor resource to be loaded.
             /// </param>
             [DllImport("user32.dll")]
             internal static extern IntPtr LoadCursor(IntPtr hInstance, int lpCursorName);
 
             /// <summary>
-            /// Sets the cursor shape
+            /// Sets the cursor shape.
             /// </summary>
             ///
             /// <param name="hCursor">
-            /// A handle to the cursor
+            /// A handle to the cursor.
             /// </param>
             [DllImport("user32.dll")]
             internal static extern IntPtr SetCursor(IntPtr hCursor);
