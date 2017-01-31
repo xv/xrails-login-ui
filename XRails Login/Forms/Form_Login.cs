@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Diagnostics;
+using System;
 
 namespace XRails
 {
@@ -65,25 +65,25 @@ namespace XRails
             // event. However, it may cause the form to flicker when the software is launched
             foreach (Control item in xRails_RightPanel1.Controls)
             {
-                if (item.Visible != true) { animator1.Show(item); }
+                if (item.Visible != true)
+                    animator1.Show(item);
             };
         }
 
         private void Wait(int interval)
         {
-            Stopwatch stopW = new Stopwatch();
+            var stopW = new Stopwatch();
             stopW.Start();
+
             while (stopW.ElapsedMilliseconds < interval)
-            {
                 Application.DoEvents();
-            }
+
             stopW.Stop();
         }
 
+        // Just simulating a login process
         private void Button_Login_Click(object sender, EventArgs e)
         {
-            // Just simulating a login process
-
             xRails_TextBox1.Enabled = false;
             xRails_TextBox2.Enabled = false;
             Button_Login.Enabled = false;
