@@ -94,7 +94,7 @@
             // xRails_TextBox2
             // 
             this.xRails_TextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(67)))));
-            this.xRails_TextBox2.ColorBordersOnEnter = false;
+            this.xRails_TextBox2.ColorBordersOnEnter = true;
             this.animator1.SetDecoration(this.xRails_TextBox2, AnimatorNS.DecorationType.None);
             this.xRails_TextBox2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.xRails_TextBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(131)))), ((int)(((byte)(140)))));
@@ -117,7 +117,7 @@
             // xRails_TextBox1
             // 
             this.xRails_TextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(67)))));
-            this.xRails_TextBox1.ColorBordersOnEnter = false;
+            this.xRails_TextBox1.ColorBordersOnEnter = true;
             this.animator1.SetDecoration(this.xRails_TextBox1, AnimatorNS.DecorationType.None);
             this.xRails_TextBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.xRails_TextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(131)))), ((int)(((byte)(140)))));
