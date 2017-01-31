@@ -838,7 +838,9 @@ namespace XRails
         #region Create Round Rectangle
         
         // Snippet by RodStephens
-        private static GraphicsPath RoundedRect(RectangleF rect, float x_radius, float y_radius, bool round_upperLeft, bool round_upperRight, bool round_lowerRight, bool round_lowerLeft)
+        private static GraphicsPath RoundedRect(RectangleF rect, float x_radius, float y_radius,
+                                                                 bool round_upperLeft, bool round_upperRight,
+                                                                 bool round_lowerRight, bool round_lowerLeft)
         {
             PointF point1, point2;
             var path = new GraphicsPath();
