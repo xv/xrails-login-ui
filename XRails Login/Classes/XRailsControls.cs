@@ -24,45 +24,10 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System;
 
-using XRails.NativeMethods;
+using XRails.Classes;
 
 namespace XRails
 {
-    #region Native Methods
-
-    namespace NativeMethods
-    {
-        public class WindowsCursor
-        {
-            /// <summary>
-            /// Loads the specified cursor resource from the executable (.EXE) file
-            /// associated with an application instance.
-            /// </summary>
-            ///
-            /// <param name="hInstance">
-            /// A handle to an instance of the module whose executable file contains the
-            /// cursor to be loaded.
-            /// </param>
-            ///
-            /// <param name="lpCursorName">
-            /// The name of the cursor resource to be loaded.
-            /// </param>
-            [DllImport("user32.dll")]
-            internal static extern IntPtr LoadCursor(IntPtr hInstance, int lpCursorName);
-
-            /// <summary>
-            /// Sets the cursor shape.
-            /// </summary>
-            ///
-            /// <param name="hCursor">
-            /// A handle to the cursor.
-            /// </param>
-            [DllImport("user32.dll")]
-            internal static extern IntPtr SetCursor(IntPtr hCursor);
-        }
-    }
-
-    #endregion
     #region TopLeftBox
 
     public class XRails_TopLeftBox : Control
@@ -244,7 +209,7 @@ namespace XRails
         {
             if (msg.Msg == WM_SETCURSOR)
             {
-                WindowsCursor.SetCursor(WindowsCursor.LoadCursor(IntPtr.Zero, IDC_HAND));
+                NativeMethods.SetCursor(NativeMethods.LoadCursor(IntPtr.Zero, IDC_HAND));
                 msg.Result = IntPtr.Zero;
                 return;
             }
@@ -1019,7 +984,7 @@ namespace XRails
         {
             if (msg.Msg == WM_SETCURSOR)
             {
-                WindowsCursor.SetCursor(WindowsCursor.LoadCursor(IntPtr.Zero, IDC_HAND));
+                NativeMethods.SetCursor(NativeMethods.LoadCursor(IntPtr.Zero, IDC_HAND));
                 msg.Result = IntPtr.Zero;
                 return;
             }
