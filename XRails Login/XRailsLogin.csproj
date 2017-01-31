@@ -60,7 +60,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classes\XRailsControls.cs">
+    <Compile Include="Classes\Controls.cs">
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="Forms\Form_Login.resx">
