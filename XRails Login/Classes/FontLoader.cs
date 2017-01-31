@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System;
 
-namespace XRails
+namespace XRails.Classes
 {
     internal sealed class FontLoader
     {
