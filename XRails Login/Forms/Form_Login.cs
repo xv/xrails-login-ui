@@ -39,19 +39,30 @@ namespace XRails
             animator1.TimeStep = 0.02F;
 
             // Set the form opacity to 0% and enable the timer that will increase it when the
-            // software is launched
+            // software is launched.
             Opacity = 0;
             FadeIn.Interval = 1;
             FadeIn.Enabled = true;
 
             // Add a dynamic handler to the .Tick event
             FadeIn.Tick += new EventHandler(FadeIn_Tick);
+
+            BTN_Login.Enabled = false;
+
+            TB_Username.TextChanged += ValidateInput;
+            TB_Password.TextChanged += ValidateInput;
+        }
+
+        private void ValidateInput(object sender, EventArgs e)
+        {
+            BTN_Login.Enabled = !(TB_Username.Text == string.Empty ||
+                                  TB_Password.Text == string.Empty);
         }
 
         private void FadeIn_Tick(object sender, EventArgs e)
         {
             // Increase the form opacity value until it reaches 1 (or 100%). After that, stop the
-            // timer and disable it
+            // timer and disable it.
             Opacity += 0.03;
             if (Opacity == 1)
             {
@@ -64,7 +75,7 @@ namespace XRails
         {
             // Animate the controls that have the property [Visible = False] after the form has
             // been fully loaded and became visible. This code can be added to the {Form_Load}
-            // event. However, it may cause the form to flicker when the software is launched
+            // event. However, it may cause the form to flicker when the software is launched.
             foreach (Control item in xRails_RightPanel1.Controls)
             {
                 if (item.Visible != true)
@@ -84,23 +95,23 @@ namespace XRails
         }
 
         // Just simulating a login process
-        private void Button_Login_Click(object sender, EventArgs e)
+        private void BTN_Login_Click(object sender, EventArgs e)
         {
-            xRails_TextBox1.Enabled = false;
-            xRails_TextBox2.Enabled = false;
-            Button_Login.Enabled = false;
+            TB_Username.Enabled = false;
+            TB_Password.Enabled = false;
+            BTN_Login.Enabled = false;
 
-            animator1.Hide(Button_Login, true, AnimatorNS.Animation.HorizSlide);
+            animator1.Hide(BTN_Login, true, AnimatorNS.Animation.HorizSlide);
             animator1.Show(Label_LoggingIn, true);
 
             Wait(4000);
 
             animator1.Hide(Label_LoggingIn, true);
-            animator1.Show(Button_Login, true, AnimatorNS.Animation.HorizSlide);
+            animator1.Show(BTN_Login, true, AnimatorNS.Animation.HorizSlide);
 
-            xRails_TextBox1.Enabled = true;
-            xRails_TextBox2.Enabled = true;
-            Button_Login.Enabled = true;
+            TB_Username.Enabled = true;
+            TB_Password.Enabled = true;
+            BTN_Login.Enabled = true;
         }
     }
 }
