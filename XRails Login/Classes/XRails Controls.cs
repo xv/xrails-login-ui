@@ -392,7 +392,7 @@ namespace XRails
             }
         }
 
-        private bool _ColorBordersOnEnter = false;
+        private bool _ColorBordersOnEnter = true;
         [Browsable(true)]
         [Description("Decides whether the top and bottom border lines are recolored on Enter event.")]
         public bool ColorBordersOnEnter
