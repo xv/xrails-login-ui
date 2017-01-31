@@ -15,9 +15,9 @@ namespace XRails.Classes
             {
                 // Add a font provided by the client application without installing it
                 // SNIPPET CREDIT: Shibumi
-                fontCollection = new PrivateFontCollection();
-                var fontLength = Properties.Resources.Raleway_Light.Length;
-                var fontData = Properties.Resources.Raleway_Light;
+                fontCollection    = new PrivateFontCollection();
+                var fontLength    = Properties.Resources.Raleway_Light.Length;
+                var fontData      = Properties.Resources.Raleway_Light;
                 var memoryPointer = Marshal.AllocCoTaskMem(fontLength);
 
                 Marshal.Copy(fontData, 0, memoryPointer, fontLength);
