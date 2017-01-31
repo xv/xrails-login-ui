@@ -162,19 +162,6 @@ namespace XRails
     {
         #region Properties
 
-        private TextRenderingHint _TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-        [Browsable(true)]
-        [Description("Specifies the quality of text rendering.")]
-        public TextRenderingHint TextRenderingHint
-        {
-            get { return _TextRenderingHint; }
-            set
-            {
-                _TextRenderingHint = value;
-                Invalidate();
-            }
-        }
-
         private PanelSide _Side;
         [Browsable(true)]
         [Description("Determines the foreground color of the label according to which side it is placed on.")]
@@ -193,6 +180,19 @@ namespace XRails
                         ForeColor = ColorTranslator.FromHtml("#AAABB0");
                         break;
                 }
+                Invalidate();
+            }
+        }
+
+        private TextRenderingHint _TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+        [Browsable(true)]
+        [Description("Specifies the quality of text rendering.")]
+        public TextRenderingHint TextRenderingHint
+        {
+            get { return _TextRenderingHint; }
+            set
+            {
+                _TextRenderingHint = value;
                 Invalidate();
             }
         }
@@ -229,12 +229,15 @@ namespace XRails
 
     public class XRails_LinkLabel : LinkLabel
     {
+        #region Variables
+
         private readonly Color linkColor       = ColorTranslator.FromHtml("#F25D59");
         private readonly Color activeLinkColor = ColorTranslator.FromHtml("#DE5954");
 
         private const int WM_SETCURSOR = 0x0020;
         private const int IDC_HAND = 32649;
 
+        #endregion
         #region Use Win32 hand cursor
 
         protected override void WndProc(ref Message msg)
@@ -301,7 +304,7 @@ namespace XRails
     [DefaultEvent("TextChanged")]
     public class XRails_TextBox : Control
     {
-        #region General Variables
+        #region Variables
 
         internal TextBox XRailsTB = new TextBox();
 
@@ -311,6 +314,18 @@ namespace XRails
 
         #endregion
         #region Properties
+
+        private bool _ColorBordersOnEnter = true;
+        [Browsable(true)]
+        [Description("Decides whether the top and bottom border lines are recolored on Enter event.")]
+        public bool ColorBordersOnEnter
+        {
+            get { return _ColorBordersOnEnter; }
+            set
+            {
+                _ColorBordersOnEnter = value;
+            }
+        }
 
         private Image _Image;
         [Browsable(true)]
@@ -415,18 +430,6 @@ namespace XRails
             {
                 _ShowTopBorder = value;
                 Invalidate();
-            }
-        }
-
-        private bool _ColorBordersOnEnter = true;
-        [Browsable(true)]
-        [Description("Decides whether the top and bottom border lines are recolored on Enter event.")]
-        public bool ColorBordersOnEnter
-        {
-            get { return _ColorBordersOnEnter; }
-            set
-            {
-                _ColorBordersOnEnter = value;
             }
         }
 
@@ -617,8 +620,8 @@ namespace XRails
         public XRails_TextBox()
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor |
-                     ControlStyles.AllPaintingInWmPaint |
-                     ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.AllPaintingInWmPaint         |
+                     ControlStyles.OptimizedDoubleBuffer        |
                      ControlStyles.UserPaint, true);
 
             DoubleBuffered = true;
@@ -688,8 +691,10 @@ namespace XRails
         {
             Text = XRailsTB.Text;
 
-            if (XRailsTB.TextLength > 0) { RemoveWatermark(); }
-            else { DrawWatermark(); }
+            if (XRailsTB.TextLength > 0)
+                RemoveWatermark();
+            else
+                DrawWatermark();
         }
 
         public void _BaseTextChanged(object sender, EventArgs e)
@@ -735,7 +740,9 @@ namespace XRails
                 g.DrawImage(_Image, 23, 14, 16, 16);
 
             e.Graphics.DrawImage((Image)bitmap.Clone(), 0, 0);
-            g.Dispose(); bitmap.Dispose();
+
+            g.Dispose();
+            bitmap.Dispose();
         }
     }
 
