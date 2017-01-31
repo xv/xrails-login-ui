@@ -83,6 +83,13 @@ namespace XRails
             };
         }
 
+        private void Form_Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Unsubscribe events
+            TB_Username.TextChanged -= ValidateInput;
+            TB_Password.TextChanged -= ValidateInput;
+        }
+
         private void Wait(int interval)
         {
             var stopW = new Stopwatch();
