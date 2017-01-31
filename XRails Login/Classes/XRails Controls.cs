@@ -16,7 +16,6 @@
 ** |-----------DO-NOT-REMOVE-----------|
 */
 
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -24,6 +23,8 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System;
+
+using XRails.NativeMethods;
 
 namespace XRails
 {
@@ -34,19 +35,28 @@ namespace XRails
         public class WindowsCursor
         {
             /// <summary>
-            /// Loads the specified cursor resource from the executable (.EXE) file associated with an application instance
+            /// Loads the specified cursor resource from the executable (.EXE) file
+            /// associated with an application instance
             /// </summary>
-            /// <param name="hInstance">A handle to an instance of the module whose executable file contains the cursor to be loaded</param>
-            /// <param name="lpCursorName">The name of the cursor resource to be loaded</param>
-            /// <returns></returns>
+            ///
+            /// <param name="hInstance">
+            /// A handle to an instance of the module whose executable file contains the
+            /// cursor to be loaded
+            /// </param>
+            ///
+            /// <param name="lpCursorName">
+            /// The name of the cursor resource to be loaded
+            /// </param>
             [DllImport("user32.dll")]
             internal static extern IntPtr LoadCursor(IntPtr hInstance, int lpCursorName);
 
             /// <summary>
             /// Sets the cursor shape
             /// </summary>
-            /// <param name="hCursor">A handle to the cursor</param>
-            /// <returns></returns>
+            ///
+            /// <param name="hCursor">
+            /// A handle to the cursor
+            /// </param>
             [DllImport("user32.dll")]
             internal static extern IntPtr SetCursor(IntPtr hCursor);
         }
@@ -95,9 +105,9 @@ namespace XRails
         {
             DoubleBuffered = true;
 
-            SetStyle(ControlStyles.AllPaintingInWmPaint |
+            SetStyle(ControlStyles.AllPaintingInWmPaint  |
                      ControlStyles.OptimizedDoubleBuffer |
-                     ControlStyles.ResizeRedraw |
+                     ControlStyles.ResizeRedraw          |
                      ControlStyles.UserPaint, true);
 
             UpdateStyles();
@@ -123,9 +133,9 @@ namespace XRails
         {
             DoubleBuffered = true;
 
-            SetStyle(ControlStyles.AllPaintingInWmPaint |
+            SetStyle(ControlStyles.AllPaintingInWmPaint  |
                      ControlStyles.OptimizedDoubleBuffer |
-                     ControlStyles.ResizeRedraw |
+                     ControlStyles.ResizeRedraw          |
                      ControlStyles.UserPaint, true);
 
             UpdateStyles();
@@ -170,8 +180,15 @@ namespace XRails
             set
             {
                 _Side = value;
-                if      (value == PanelSide.LeftPanel)  { ForeColor = ColorTranslator.FromHtml("#FAFAFA"); }
-                else if (value == PanelSide.RightPanel) { ForeColor = ColorTranslator.FromHtml("#AAABB0"); }
+                switch (value)
+                {
+                    case PanelSide.LeftPanel:
+                        ForeColor = ColorTranslator.FromHtml("#FAFAFA");
+                        break;
+                    case PanelSide.RightPanel:
+                        ForeColor = ColorTranslator.FromHtml("#AAABB0");
+                        break;
+                }
                 Invalidate();
             }
         }
@@ -208,8 +225,8 @@ namespace XRails
 
     public class XRails_LinkLabel : LinkLabel
     {
-        Color linkColor = ColorTranslator.FromHtml("#F25D59");
-        Color activeLinkColor = ColorTranslator.FromHtml("#DE5954");
+        private readonly Color linkColor = ColorTranslator.FromHtml("#F25D59");
+        private readonly Color activeLinkColor = ColorTranslator.FromHtml("#DE5954");
 
         private const int WM_SETCURSOR = 0x0020;
         private const int IDC_HAND = 32649;
@@ -220,7 +237,7 @@ namespace XRails
         {
             if (msg.Msg == WM_SETCURSOR)
             {
-                NativeMethods.WindowsCursor.SetCursor(NativeMethods.WindowsCursor.LoadCursor(IntPtr.Zero, IDC_HAND));
+                WindowsCursor.SetCursor(WindowsCursor.LoadCursor(IntPtr.Zero, IDC_HAND));
                 msg.Result = IntPtr.Zero;
                 return;
             }
@@ -300,11 +317,9 @@ namespace XRails
             set
             {
                 _Image = value;
-                if (value == null) { _ImageSize = Size.Empty; }
-                else               { _ImageSize = value.Size; }
+                _ImageSize = value == null ? Size.Empty : value.Size;
+                XRailsTB.Location = new Point(24, 14);
 
-                if (Image != null) { XRailsTB.Location = new Point(24, 14); }
-                else               { XRailsTB.Location = new Point(24, 14); }
                 Invalidate();
             }
         }
@@ -474,7 +489,8 @@ namespace XRails
 
         private void _Enter(object sender, EventArgs e)
         {
-            if (_ColorBordersOnEnter == true) { borderColor = new Pen(ColorTranslator.FromHtml("#F25D59")); }
+            if (_ColorBordersOnEnter)
+                borderColor = new Pen(ColorTranslator.FromHtml("#F25D59"));
 
             _WatermarkBrush = new SolidBrush(_WatermarkColor);
 
@@ -488,7 +504,8 @@ namespace XRails
 
         private void _Leave(object sender, EventArgs e)
         {
-            if (_ColorBordersOnEnter == true) { borderColor = new Pen(ColorTranslator.FromHtml("#3C3F50")); }
+            if (_ColorBordersOnEnter)
+                borderColor = new Pen(ColorTranslator.FromHtml("#3C3F50"));
 
             _WatermarkBrush = new SolidBrush(_WatermarkColor);
 
@@ -533,7 +550,7 @@ namespace XRails
         {
             // X has to be >=1, otherwise the cursor won't show
             _WatermarkContainer.Location = new Point(1, -1);
-            _WatermarkContainer.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
+            _WatermarkContainer.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             _WatermarkContainer.Width = XRailsTB.Width - 25;
             _WatermarkContainer.Height = XRailsTB.Height;
 
@@ -587,7 +604,8 @@ namespace XRails
         {
             base.OnInvalidated(e);
 
-            if (_WatermarkContainer != null) { _WatermarkContainer.Invalidate(); }
+            if (_WatermarkContainer != null)
+                _WatermarkContainer.Invalidate();
         }
 
         #endregion
@@ -617,7 +635,7 @@ namespace XRails
             Size = new Size(145, 49);
         }
 
-        void AddTextBox()
+        private void AddTextBox()
         {
             XRailsTB.Size = new Size(Width - 10, 49);
             XRailsTB.Location = new Point(24, 14);
@@ -662,7 +680,7 @@ namespace XRails
             }
         }
 
-        public void _TextChanged(Object sender, EventArgs e)
+        public void _TextChanged(object sender, EventArgs e)
         {
             Text = XRailsTB.Text;
 
@@ -670,7 +688,7 @@ namespace XRails
             else { DrawWatermark(); }
         }
 
-        public void _BaseTextChanged(Object sender, EventArgs e)
+        public void _BaseTextChanged(object sender, EventArgs e)
         {
             XRailsTB.Text = Text;
         }
@@ -679,11 +697,11 @@ namespace XRails
         {
             base.OnPaint(e);
 
-            Bitmap B = new Bitmap(Width, Height);
-            Graphics G = Graphics.FromImage(B);
+            var bitmap = new Bitmap(Width, Height);
+            var g = Graphics.FromImage(bitmap);
 
             DrawWatermark();
-            G.SmoothingMode = SmoothingMode.None;
+            g.SmoothingMode = SmoothingMode.None;
 
             if (Image == null) { XRailsTB.Width = Width - 35; }
             else
@@ -698,21 +716,22 @@ namespace XRails
             // Top border
             if (_ShowTopBorder)
             {
-                G.DrawLine(borderColor, 0, 0, Width - 1, 0);
-                G.DrawLine(borderColor, 0, 1, Width - 1, 1);
+                g.DrawLine(borderColor, 0, 0, Width - 1, 0);
+                g.DrawLine(borderColor, 0, 1, Width - 1, 1);
             }
 
             // Bottom border
             if (_ShowBottomBorder)
             {
-                G.DrawLine(borderColor, 0, Height - 2, Width - 1, Height - 2);
-                G.DrawLine(borderColor, 0, Height - 1, Width - 1, Height - 1);
+                g.DrawLine(borderColor, 0, Height - 2, Width - 1, Height - 2);
+                g.DrawLine(borderColor, 0, Height - 1, Width - 1, Height - 1);
             }
 
-            if (Image != null) { G.DrawImage(_Image, 23, 14, 16, 16); }
+            if (Image != null)
+                g.DrawImage(_Image, 23, 14, 16, 16);
 
-            e.Graphics.DrawImage((Image)(B.Clone()), 0, 0);
-            G.Dispose(); B.Dispose();
+            e.Graphics.DrawImage((Image)bitmap.Clone(), 0, 0);
+            g.Dispose(); bitmap.Dispose();
         }
     }
 
@@ -723,14 +742,14 @@ namespace XRails
     {
         #region General Variables
 
-        private Timer animationTimer;
+        private readonly Timer animationTimer;
         private int buttonGlow;
         private int stringGlow;
         private bool hoverButton;
 
         private int mouseState;
         private Rectangle R1;
-        private StringFormat stringFormat;
+        private readonly StringFormat stringFormat;
 
         private const int WM_SETCURSOR = 0x0020;
         private const int IDC_HAND = 32649;
@@ -819,15 +838,15 @@ namespace XRails
         #region Create Round Rectangle
         
         // Snippet by RodStephens
-        private GraphicsPath RoundedRect(RectangleF rect, float x_radius, float y_radius, bool round_upperLeft, bool round_upperRight, bool round_lowerRight, bool round_lowerLeft)
+        private static GraphicsPath RoundedRect(RectangleF rect, float x_radius, float y_radius, bool round_upperLeft, bool round_upperRight, bool round_lowerRight, bool round_lowerLeft)
         {
             PointF point1, point2;
-            GraphicsPath path = new GraphicsPath();
+            var path = new GraphicsPath();
 
             // Upper left corner
             if (round_upperLeft)
             {
-                RectangleF corner = new RectangleF(rect.X, rect.Y, 2 * x_radius, 2 * y_radius);
+                var corner = new RectangleF(rect.X, rect.Y, 2 * x_radius, 2 * y_radius);
                 path.AddArc(corner, 180, 90);
                 point1 = new PointF(rect.X + x_radius, rect.Y);
             }
@@ -844,7 +863,7 @@ namespace XRails
             // Upper right corner
             if (round_upperRight)
             {
-                RectangleF corner = new RectangleF(rect.Right - 2 * x_radius, rect.Y, 2 * x_radius, 2 * y_radius);
+                var corner = new RectangleF(rect.Right - 2 * x_radius, rect.Y, 2 * x_radius, 2 * y_radius);
                 path.AddArc(corner, 270, 90);
                 point1 = new PointF(rect.Right, rect.Y + y_radius);
             }
@@ -861,7 +880,7 @@ namespace XRails
             // Lower right corner
             if (round_lowerRight)
             {
-                RectangleF corner = new RectangleF(rect.Right - 2 * x_radius, rect.Bottom - 2 * y_radius, 2 * x_radius, 2 * y_radius);
+                var corner = new RectangleF(rect.Right - 2 * x_radius, rect.Bottom - 2 * y_radius, 2 * x_radius, 2 * y_radius);
                 path.AddArc(corner, 0, 90);
                 point1 = new PointF(rect.Right - x_radius, rect.Bottom);
             }
@@ -878,7 +897,7 @@ namespace XRails
             // Lower left corner
             if (round_lowerLeft)
             {
-                RectangleF corner = new RectangleF(rect.X, rect.Bottom - 2 * y_radius, 2 * x_radius, 2 * y_radius);
+                var corner = new RectangleF(rect.X, rect.Bottom - 2 * y_radius, 2 * x_radius, 2 * y_radius);
                 path.AddArc(corner, 90, 90);
                 point1 = new PointF(rect.X, rect.Bottom - y_radius);
             }
@@ -928,7 +947,7 @@ namespace XRails
             base.OnMouseLeave(e);
         }
 
-        protected override void OnTextChanged(System.EventArgs e)
+        protected override void OnTextChanged(EventArgs e)
         {
             Invalidate();
             base.OnTextChanged(e);
@@ -955,10 +974,10 @@ namespace XRails
 
         public XRails_Button()
         {
-            SetStyle(ControlStyles.AllPaintingInWmPaint | 
-                     ControlStyles.OptimizedDoubleBuffer | 
-                     ControlStyles.ResizeRedraw | 
-                     ControlStyles.SupportsTransparentBackColor | 
+            SetStyle(ControlStyles.AllPaintingInWmPaint         |
+                     ControlStyles.OptimizedDoubleBuffer        |
+                     ControlStyles.ResizeRedraw                 |
+                     ControlStyles.SupportsTransparentBackColor |
                      ControlStyles.UserPaint, true);
 
             BackColor = Color.Transparent;
@@ -968,7 +987,11 @@ namespace XRails
             Size = new Size(144, 47);
             MinimumSize = new Size(144, 47);
             
-            stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+            stringFormat = new StringFormat
+            { 
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
 
             animationTimer = new Timer { Interval = 1 };
             animationTimer.Tick += Animation;
@@ -980,7 +1003,7 @@ namespace XRails
         {
             if (msg.Msg == WM_SETCURSOR)
             {
-                NativeMethods.WindowsCursor.SetCursor(NativeMethods.WindowsCursor.LoadCursor(IntPtr.Zero, IDC_HAND));
+                WindowsCursor.SetCursor(WindowsCursor.LoadCursor(IntPtr.Zero, IDC_HAND));
                 msg.Result = IntPtr.Zero;
                 return;
             }
@@ -989,9 +1012,8 @@ namespace XRails
 
         #endregion
 
-        private void Animation(Object sender, EventArgs e)
+        private void Animation(object sender, EventArgs e)
         {
-
             if (hoverButton)
             {
                 if (buttonGlow < 242) { buttonGlow += 15; }
@@ -1008,16 +1030,16 @@ namespace XRails
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.SmoothingMode     = SmoothingMode.AntiAlias;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            g.PixelOffsetMode   = PixelOffsetMode.HighQuality;
 
             const float margin = 3;
-            float width = ClientSize.Width - 2 * margin;
+            float width  = ClientSize.Width - 2 * margin;
             float height = ClientSize.Height - 6;
 
-            RectangleF rect = new RectangleF(margin, margin, width, height);
-            GraphicsPath path = RoundedRect(rect, _Radius, _Radius, false, true, true, false);
+            var rect = new RectangleF(margin, margin, width, height);
+            var path = RoundedRect(rect, _Radius, _Radius, false, true, true, false);
 
             // Fill the button with animation when the mouse is over the control
             g.FillPath(new SolidBrush(Color.FromArgb(buttonGlow, Color.FromArgb(242, 93, 89))), path);
@@ -1025,27 +1047,32 @@ namespace XRails
             switch (mouseState)
             {
                 case 0: // Inactive state
-                    using (Pen pen = new Pen(ColorTranslator.FromHtml("#F25D59"), 2.0F))
-                    {                   
+                    using (var pen = new Pen(ColorTranslator.FromHtml("#F25D59"), 2.0F))
+                    using (var brush = new SolidBrush(ColorTranslator.FromHtml("#F25D59")))
+                    {
                         g.DrawPath(pen, path);
+                        g.DrawString(Text, Font, brush, R1, stringFormat);
                     }
-                    g.DrawString(Text, Font, new SolidBrush(ColorTranslator.FromHtml("#F25D59")), R1, stringFormat);
                     break;
                 case 1: // Pressed state
-                    using (Pen pen = new Pen(ColorTranslator.FromHtml("#F25D59"), 2.0F))
+                    using (var pen = new Pen(ColorTranslator.FromHtml("#F25D59"), 2.0F))
+                    using (var brush = new SolidBrush(ColorTranslator.FromHtml("#FFFFFF")))
                     {
                         g.DrawPath(pen, path);
+                        g.DrawString(Text, Font, brush, R1, stringFormat);
                     }
-                    g.DrawString(Text, Font, new SolidBrush(Color.White), R1, stringFormat);
                     break;
                 case 3: // Hover state
-                    using (Pen pen = new Pen(ColorTranslator.FromHtml("#F25D59"), 2.0F))
+                    using (var pen = new Pen(ColorTranslator.FromHtml("#F25D59"), 2.0F))
+                    using (var brush = new SolidBrush(Color.FromArgb(80 + stringGlow, Color.White)))
                     {
                         g.DrawPath(pen, path);
+                        g.DrawString(Text, Font, brush, R1, stringFormat);
+
                     }
-                    g.DrawString(Text, Font, new SolidBrush(Color.FromArgb(80 + stringGlow, Color.White)), R1, stringFormat);
                     break;
             }
+
             base.OnPaint(e);
         }
     }
