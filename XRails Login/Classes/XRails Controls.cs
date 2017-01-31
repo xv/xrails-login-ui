@@ -810,9 +810,7 @@ namespace XRails
             set
             {
                 if (Enum.IsDefined(typeof(DialogResult), value))
-                {
                     dlgResult = value;
-                }
             }
         }
 
