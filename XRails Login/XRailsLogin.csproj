@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\FontLoader.cs" />
+    <Compile Include="Classes\NativeMethods.cs" />
     <Compile Include="Forms\Form_Login.cs">
       <SubType>Form</SubType>
     </Compile>
