@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
+            AnimatorNS.Animation animation2 = new AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Login));
             this.animator1 = new AnimatorNS.Animator(this.components);
             this.xRails_RightPanel1 = new XRails.XRails_RightPanel();
-            this.xRails_TextBox2 = new XRails.XRails_TextBox();
-            this.xRails_TextBox1 = new XRails.XRails_TextBox();
+            this.TB_Password = new XRails.XRails_TextBox();
+            this.TB_Username = new XRails.XRails_TextBox();
             this.xRails_LinkLabel1 = new XRails.XRails_LinkLabel();
             this.xRails_Label2 = new XRails.XRails_Label();
             this.xRails_Label1 = new XRails.XRails_Label();
             this.TitleLabel_LoginTo = new XRails.XRails_TitleLabel();
-            this.Button_Login = new XRails.XRails_Button();
+            this.BTN_Login = new XRails.XRails_Button();
             this.Label_LoggingIn = new XRails.XRails_Label();
             this.xRails_LeftPanel1 = new XRails.XRails_LeftPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -54,33 +54,33 @@
             // 
             this.animator1.AnimationType = AnimatorNS.AnimationType.Custom;
             this.animator1.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.animator1.DefaultAnimation = animation1;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.animator1.DefaultAnimation = animation2;
             // 
             // xRails_RightPanel1
             // 
             this.xRails_RightPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(59)))));
-            this.xRails_RightPanel1.Controls.Add(this.xRails_TextBox2);
-            this.xRails_RightPanel1.Controls.Add(this.xRails_TextBox1);
+            this.xRails_RightPanel1.Controls.Add(this.TB_Password);
+            this.xRails_RightPanel1.Controls.Add(this.TB_Username);
             this.xRails_RightPanel1.Controls.Add(this.xRails_LinkLabel1);
             this.xRails_RightPanel1.Controls.Add(this.xRails_Label2);
             this.xRails_RightPanel1.Controls.Add(this.xRails_Label1);
             this.xRails_RightPanel1.Controls.Add(this.TitleLabel_LoginTo);
-            this.xRails_RightPanel1.Controls.Add(this.Button_Login);
+            this.xRails_RightPanel1.Controls.Add(this.BTN_Login);
             this.xRails_RightPanel1.Controls.Add(this.Label_LoggingIn);
             this.xRails_RightPanel1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.animator1.SetDecoration(this.xRails_RightPanel1, AnimatorNS.DecorationType.None);
@@ -91,51 +91,51 @@
             this.xRails_RightPanel1.Size = new System.Drawing.Size(337, 480);
             this.xRails_RightPanel1.TabIndex = 1;
             // 
-            // xRails_TextBox2
+            // TB_Password
             // 
-            this.xRails_TextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(67)))));
-            this.xRails_TextBox2.ColorBordersOnEnter = true;
-            this.animator1.SetDecoration(this.xRails_TextBox2, AnimatorNS.DecorationType.None);
-            this.xRails_TextBox2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.xRails_TextBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(131)))), ((int)(((byte)(140)))));
-            this.xRails_TextBox2.Image = ((System.Drawing.Image)(resources.GetObject("xRails_TextBox2.Image")));
-            this.xRails_TextBox2.Location = new System.Drawing.Point(-1, 247);
-            this.xRails_TextBox2.MaxLength = 32767;
-            this.xRails_TextBox2.Multiline = false;
-            this.xRails_TextBox2.Name = "xRails_TextBox2";
-            this.xRails_TextBox2.ReadOnly = false;
-            this.xRails_TextBox2.ShortcutsEnabled = true;
-            this.xRails_TextBox2.ShowBottomBorder = true;
-            this.xRails_TextBox2.ShowTopBorder = false;
-            this.xRails_TextBox2.Size = new System.Drawing.Size(339, 50);
-            this.xRails_TextBox2.TabIndex = 6;
-            this.xRails_TextBox2.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.xRails_TextBox2.UseSystemPasswordChar = true;
-            this.xRails_TextBox2.Watermark = "Password";
-            this.xRails_TextBox2.WatermarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(120)))), ((int)(((byte)(129)))));
+            this.TB_Password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(67)))));
+            this.TB_Password.ColorBordersOnEnter = true;
+            this.animator1.SetDecoration(this.TB_Password, AnimatorNS.DecorationType.None);
+            this.TB_Password.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.TB_Password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(131)))), ((int)(((byte)(140)))));
+            this.TB_Password.Image = ((System.Drawing.Image)(resources.GetObject("TB_Password.Image")));
+            this.TB_Password.Location = new System.Drawing.Point(-1, 247);
+            this.TB_Password.MaxLength = 32767;
+            this.TB_Password.Multiline = false;
+            this.TB_Password.Name = "TB_Password";
+            this.TB_Password.ReadOnly = false;
+            this.TB_Password.ShortcutsEnabled = true;
+            this.TB_Password.ShowBottomBorder = true;
+            this.TB_Password.ShowTopBorder = false;
+            this.TB_Password.Size = new System.Drawing.Size(339, 50);
+            this.TB_Password.TabIndex = 6;
+            this.TB_Password.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.TB_Password.UseSystemPasswordChar = true;
+            this.TB_Password.Watermark = "Password";
+            this.TB_Password.WatermarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(120)))), ((int)(((byte)(129)))));
             // 
-            // xRails_TextBox1
+            // TB_Username
             // 
-            this.xRails_TextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(67)))));
-            this.xRails_TextBox1.ColorBordersOnEnter = true;
-            this.animator1.SetDecoration(this.xRails_TextBox1, AnimatorNS.DecorationType.None);
-            this.xRails_TextBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.xRails_TextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(131)))), ((int)(((byte)(140)))));
-            this.xRails_TextBox1.Image = ((System.Drawing.Image)(resources.GetObject("xRails_TextBox1.Image")));
-            this.xRails_TextBox1.Location = new System.Drawing.Point(-1, 197);
-            this.xRails_TextBox1.MaxLength = 32767;
-            this.xRails_TextBox1.Multiline = false;
-            this.xRails_TextBox1.Name = "xRails_TextBox1";
-            this.xRails_TextBox1.ReadOnly = false;
-            this.xRails_TextBox1.ShortcutsEnabled = true;
-            this.xRails_TextBox1.ShowBottomBorder = false;
-            this.xRails_TextBox1.ShowTopBorder = true;
-            this.xRails_TextBox1.Size = new System.Drawing.Size(339, 50);
-            this.xRails_TextBox1.TabIndex = 5;
-            this.xRails_TextBox1.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.xRails_TextBox1.UseSystemPasswordChar = false;
-            this.xRails_TextBox1.Watermark = "Username or Email";
-            this.xRails_TextBox1.WatermarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(120)))), ((int)(((byte)(129)))));
+            this.TB_Username.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(67)))));
+            this.TB_Username.ColorBordersOnEnter = true;
+            this.animator1.SetDecoration(this.TB_Username, AnimatorNS.DecorationType.None);
+            this.TB_Username.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.TB_Username.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(131)))), ((int)(((byte)(140)))));
+            this.TB_Username.Image = ((System.Drawing.Image)(resources.GetObject("TB_Username.Image")));
+            this.TB_Username.Location = new System.Drawing.Point(-1, 197);
+            this.TB_Username.MaxLength = 32767;
+            this.TB_Username.Multiline = false;
+            this.TB_Username.Name = "TB_Username";
+            this.TB_Username.ReadOnly = false;
+            this.TB_Username.ShortcutsEnabled = true;
+            this.TB_Username.ShowBottomBorder = false;
+            this.TB_Username.ShowTopBorder = true;
+            this.TB_Username.Size = new System.Drawing.Size(339, 50);
+            this.TB_Username.TabIndex = 5;
+            this.TB_Username.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.TB_Username.UseSystemPasswordChar = false;
+            this.TB_Username.Watermark = "Username or Email";
+            this.TB_Username.WatermarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(120)))), ((int)(((byte)(129)))));
             // 
             // xRails_LinkLabel1
             // 
@@ -206,20 +206,20 @@
             this.TitleLabel_LoginTo.UseCompatibleTextRendering = true;
             this.TitleLabel_LoginTo.Visible = false;
             // 
-            // Button_Login
+            // BTN_Login
             // 
-            this.Button_Login.BackColor = System.Drawing.Color.Transparent;
-            this.animator1.SetDecoration(this.Button_Login, AnimatorNS.DecorationType.None);
-            this.Button_Login.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.Button_Login.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.Button_Login.Location = new System.Drawing.Point(-4, 317);
-            this.Button_Login.MinimumSize = new System.Drawing.Size(144, 47);
-            this.Button_Login.Name = "Button_Login";
-            this.Button_Login.Radius = 20;
-            this.Button_Login.Size = new System.Drawing.Size(144, 47);
-            this.Button_Login.TabIndex = 7;
-            this.Button_Login.Text = "LOGIN";
-            this.Button_Login.Click += new System.EventHandler(this.Button_Login_Click);
+            this.BTN_Login.BackColor = System.Drawing.Color.Transparent;
+            this.animator1.SetDecoration(this.BTN_Login, AnimatorNS.DecorationType.None);
+            this.BTN_Login.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.BTN_Login.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.BTN_Login.Location = new System.Drawing.Point(-4, 317);
+            this.BTN_Login.MinimumSize = new System.Drawing.Size(144, 47);
+            this.BTN_Login.Name = "BTN_Login";
+            this.BTN_Login.Radius = 20;
+            this.BTN_Login.Size = new System.Drawing.Size(144, 47);
+            this.BTN_Login.TabIndex = 7;
+            this.BTN_Login.Text = "LOGIN";
+            this.BTN_Login.Click += new System.EventHandler(this.BTN_Login_Click);
             // 
             // Label_LoggingIn
             // 
@@ -330,9 +330,9 @@
         private XRails_TopLeftBox xRails_TopLeftBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private AnimatorNS.Animator animator1;
-        private XRails_TextBox xRails_TextBox2;
-        private XRails_TextBox xRails_TextBox1;
-        private XRails_Button Button_Login;
+        private XRails_TextBox TB_Password;
+        private XRails_TextBox TB_Username;
+        private XRails_Button BTN_Login;
         private XRails_Label Label_LoggingIn;
 
     }
