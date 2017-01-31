@@ -168,7 +168,11 @@ namespace XRails
         public TextRenderingHint TextRenderingHint
         {
             get { return _TextRenderingHint; }
-            set { _TextRenderingHint = value; Invalidate(); }
+            set
+            {
+                _TextRenderingHint = value;
+                Invalidate();
+            }
         }
 
         private PanelSide _Side;
@@ -225,7 +229,7 @@ namespace XRails
 
     public class XRails_LinkLabel : LinkLabel
     {
-        private readonly Color linkColor = ColorTranslator.FromHtml("#F25D59");
+        private readonly Color linkColor       = ColorTranslator.FromHtml("#F25D59");
         private readonly Color activeLinkColor = ColorTranslator.FromHtml("#DE5954");
 
         private const int WM_SETCURSOR = 0x0020;
@@ -792,8 +796,8 @@ namespace XRails
         private DialogResult dlgResult;
 
         /// <summary>
-        /// Gets or sets a value that indicates whether a Button is the default button.
-        /// A user invokes the default button by pressing the ENTER key
+        /// Gets or sets a value that indicates whether a Button is the default
+        /// button. A user invokes the default button by pressing the ENTER key.
         /// </summary>
         [Browsable(false)]
         private bool IsDefault
@@ -802,7 +806,8 @@ namespace XRails
         }
 
         /// <summary>
-        /// Gets or sets the value returned to the parent form when the button is clicked
+        /// Gets or sets the value returned to the parent form when the button
+        /// is clicked.
         /// </summary>
         public DialogResult DialogResult
         {
@@ -815,10 +820,14 @@ namespace XRails
         }
 
         /// <summary>
-        /// Notifies a control that it is the default button so that its appearance and
-        /// behavior is adjusted accordingly
+        /// Notifies a control that it is the default button so that its
+        /// appearance and behavior is adjusted accordingly.
         /// </summary>
-        /// <param name="value">true if the button is to have the appearance of the default button; otherwise, false</param>
+        /// 
+        /// <param name="value">
+        /// True if the button is to have the appearance of the default button;
+        /// otherwise, false.
+        /// </param>
         public void NotifyDefault(bool value)
         {
             _IsDefault = value;
