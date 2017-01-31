@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using System;
 
+using XRails.Classes;
+
 namespace XRails
 {
     public partial class Form_Login : Form
