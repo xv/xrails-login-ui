@@ -12,10 +12,6 @@
 **  Site   : GitHub.com/ei | exr.be
 **  Created: 26.Sep.2016
 **  Version: 1.0.0
-**
-**  I am neither good at explaining nor
-**  a big fan of commenting what each
-**  line of code does, sorry about that
 ** 
 ** |-----------DO-NOT-REMOVE-----------|
 */
