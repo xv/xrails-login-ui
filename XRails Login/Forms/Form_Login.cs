@@ -83,12 +83,21 @@ namespace XRails
         private void Button_Login_Click(object sender, EventArgs e)
         {
             // Just simulating a login process
+
+            xRails_TextBox1.Enabled = false;
+            xRails_TextBox2.Enabled = false;
             Button_Login.Enabled = false;
+
             animator1.Hide(Button_Login, true, AnimatorNS.Animation.HorizSlide);
             animator1.Show(Label_LoggingIn, true);
+
             Wait(4000);
+
             animator1.Hide(Label_LoggingIn, true);
             animator1.Show(Button_Login, true, AnimatorNS.Animation.HorizSlide);
+
+            xRails_TextBox1.Enabled = true;
+            xRails_TextBox2.Enabled = true;
             Button_Login.Enabled = true;
         }
     }
