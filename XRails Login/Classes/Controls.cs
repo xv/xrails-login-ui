@@ -1,6 +1,6 @@
 /* |-----------DO-NOT-REMOVE-----------|
 ** 
-**  XRails Controls.cs
+**  Controls.cs
 ** 
 **  Copyright (C) 2016, Ezra Altahan
 ** 
