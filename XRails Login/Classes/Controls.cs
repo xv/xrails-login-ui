@@ -269,7 +269,7 @@ namespace XRails
     [DefaultEvent("TextChanged")]
     public class XRails_TextBox : Control
     {
-        #region Variables
+        #region Fields
 
         internal TextBox XRailsTB = new TextBox();
 
@@ -714,7 +714,7 @@ namespace XRails
 
     public class XRails_Button : Control, IButtonControl
     {
-        #region General Variables
+        #region Fields
 
         private readonly Timer animationTimer;
         private int buttonGlow;
