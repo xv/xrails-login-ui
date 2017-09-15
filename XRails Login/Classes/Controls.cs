@@ -494,6 +494,7 @@ namespace XRails
                 XRailsTB.SelectAll();
                 e.SuppressKeyPress = true;
             }
+            
             if (e.Control && e.KeyCode == Keys.C)
             {
                 XRailsTB.Copy();
@@ -633,23 +634,23 @@ namespace XRails
 
         private void DrawWatermark()
         {
-            if (_WatermarkContainer == null && XRailsTB.TextLength <= 0)
-            {
-                _WatermarkContainer = new Panel();
-                _WatermarkContainer.Paint += WatermarkContainer_Paint;
-                _WatermarkContainer.Invalidate();
-                _WatermarkContainer.Click += WatermarkContainer_Click;
-                XRailsTB.Controls.Add(_WatermarkContainer);
-            }
+            if (_WatermarkContainer != null || XRailsTB.TextLength > 0)
+                return;
+            
+            _WatermarkContainer = new Panel();
+            _WatermarkContainer.Paint += WatermarkContainer_Paint;
+            _WatermarkContainer.Invalidate();
+            _WatermarkContainer.Click += WatermarkContainer_Click;
+            XRailsTB.Controls.Add(_WatermarkContainer);
         }
 
         private void RemoveWatermark()
         {
-            if (_WatermarkContainer != null)
-            {
-                XRailsTB.Controls.Remove(_WatermarkContainer);
-                _WatermarkContainer = null;
-            }
+            if (_WatermarkContainer == null)
+                return;
+            
+            XRailsTB.Controls.Remove(_WatermarkContainer);
+            _WatermarkContainer = null;
         }
 
         public void _TextChanged(object sender, EventArgs e)
@@ -754,8 +755,10 @@ namespace XRails
             get { return _Radius; }
             set
             {
-                if (!(value < 1 || value > 20)) { _Radius = value; }
-                else { throw new Exception("The entered value cannot be less than 1 or greater than 20."); }
+                if (!(value < 1 || value > 20))
+                    _Radius = value;
+                else
+                    throw new Exception("The entered value cannot be less than 1 or greater than 20.");
 
                 Invalidate();
             }
