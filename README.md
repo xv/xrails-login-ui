@@ -43,9 +43,9 @@ If you are creating a new ClassLibrary project to compile XRails as a .dll, make
 
 Contact
 -------
-Your love letters &nbsp;&nbsp;&nbsp;> hello@exr.be
+Your love letters &nbsp;&nbsp;&nbsp;> xviyy@aol.com
 <br/>
-Tweet me maybe?   > [0x141](https://twitter.com/0x141)
+Tweet me maybe?   > [xviyy](https://twitter.com/xviyy)
 
 Legal
 -----
