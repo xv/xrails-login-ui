@@ -2,16 +2,15 @@
 ** 
 **  Controls.cs
 ** 
-**  Copyright (C) 2016, Ezra Altahan
+**  Copyright (C) 2016, Jad Altahan
 ** 
 **  This software may be modified and 
 **  distributed under the terms of the
 **  MIT license. See the LICENSE file
-**  for details
+**  for details.
 ** 
-**  Site   : GitHub.com/ei | exr.be
+**  Site   : GitHub.com/xv | exr.be
 **  Created: 26.Sep.2016
-**  Version: 1.0.0
 ** 
 ** |-----------DO-NOT-REMOVE-----------|
 */
