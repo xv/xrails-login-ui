@@ -194,27 +194,13 @@ namespace XRails
 
     public class XRails_LinkLabel : LinkLabel
     {
-        #region Variables
+        #region Fields
 
         private readonly Color linkColor       = ColorTranslator.FromHtml("#F25D59");
         private readonly Color activeLinkColor = ColorTranslator.FromHtml("#DE5954");
 
-        private const int WM_SETCURSOR = 0x0020;
         private const int IDC_HAND = 32649;
-
-        #endregion
-        #region Use Win32 hand cursor
-
-        protected override void WndProc(ref Message msg)
-        {
-            if (msg.Msg == WM_SETCURSOR)
-            {
-                NativeMethods.SetCursor(NativeMethods.LoadCursor(IntPtr.Zero, IDC_HAND));
-                msg.Result = IntPtr.Zero;
-                return;
-            }
-            base.WndProc(ref msg);
-        }
+        private static readonly Cursor NativeHand = new Cursor(NativeMethods.LoadCursor(IntPtr.Zero, IDC_HAND));
 
         #endregion
 
@@ -235,10 +221,24 @@ namespace XRails
             Focus();
         }
 
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            if (OverrideCursor == Cursors.Hand)
+                OverrideCursor = NativeHand;
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            OverrideCursor = null;
+        }
+
         protected override void OnInvalidated(InvalidateEventArgs e)
         {
             base.OnInvalidated(e);
-            ActiveLinkColor = activeLinkColor;
+            ActiveLinkColor  = activeLinkColor;
             VisitedLinkColor = activeLinkColor;
         }
     }
@@ -285,11 +285,8 @@ namespace XRails
         [Description("Decides whether the top and bottom border lines are recolored on Enter event.")]
         public bool ColorBordersOnEnter
         {
-            get { return _ColorBordersOnEnter; }
-            set
-            {
-                _ColorBordersOnEnter = value;
-            }
+            get { return _ColorBordersOnEnter;  }
+            set { _ColorBordersOnEnter = value; }
         }
 
         private Image _Image;
