@@ -40,7 +40,7 @@
   <ItemGroup>
     <Reference Include="Animator, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Animator.dll</HintPath>
+      <HintPath>..\assets\library\Animator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
