@@ -63,7 +63,7 @@ namespace XRails
         {
             // Increase the form opacity value until it reaches 1 (or 100%). After that, stop the
             // timer and disable it.
-            Opacity += 0.03;
+            Opacity += 0.06;
             if (Opacity == 1)
             {
                 FadeIn.Stop();
