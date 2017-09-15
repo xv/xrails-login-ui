@@ -166,7 +166,7 @@
             this.xRails_Label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(118)))), ((int)(((byte)(127)))));
             this.xRails_Label2.Location = new System.Drawing.Point(25, 428);
             this.xRails_Label2.Name = "xRails_Label2";
-            this.xRails_Label2.Size = new System.Drawing.Size(262, 30);
+            this.xRails_Label2.Size = new System.Drawing.Size(261, 30);
             this.xRails_Label2.TabIndex = 3;
             this.xRails_Label2.Text = "To obtain access to this app or for any questions\r\nabout its use, submit an email" +
     " to";
