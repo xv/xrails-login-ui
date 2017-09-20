@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRails-LoginUI", "Core\XRails-LoginUI.csproj", "{4CBBD9CB-8DD6-4D13-8F2C-34D88AEED4D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRails-LoginUI.Demo", "Demo\XRails-LoginUI.Demo.csproj", "{339F140E-EB1E-4729-9CAD-40B9EE8A624E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{4CBBD9CB-8DD6-4D13-8F2C-34D88AEED4D6}.Debug|x86.Build.0 = Debug|x86
 		{4CBBD9CB-8DD6-4D13-8F2C-34D88AEED4D6}.Release|x86.ActiveCfg = Release|x86
 		{4CBBD9CB-8DD6-4D13-8F2C-34D88AEED4D6}.Release|x86.Build.0 = Release|x86
+		{339F140E-EB1E-4729-9CAD-40B9EE8A624E}.Debug|x86.ActiveCfg = Debug|x86
+		{339F140E-EB1E-4729-9CAD-40B9EE8A624E}.Debug|x86.Build.0 = Debug|x86
+		{339F140E-EB1E-4729-9CAD-40B9EE8A624E}.Release|x86.ActiveCfg = Release|x86
+		{339F140E-EB1E-4729-9CAD-40B9EE8A624E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
