@@ -257,7 +257,7 @@
             this.Animator.SetDecoration(this.XR_Label_Support, AnimatorNS.DecorationType.None);
             this.XR_Label_Support.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.XR_Label_Support.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(118)))), ((int)(((byte)(127)))));
-            this.XR_Label_Support.Location = new System.Drawing.Point(42, 411);
+            this.XR_Label_Support.Location = new System.Drawing.Point(42, 409);
             this.XR_Label_Support.Name = "XR_Label_Support";
             this.XR_Label_Support.Size = new System.Drawing.Size(50, 15);
             this.XR_Label_Support.TabIndex = 2;
