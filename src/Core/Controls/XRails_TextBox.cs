@@ -355,7 +355,7 @@ namespace XRails.Controls
             Controls.Add(XRailsTB);
             DrawWatermark();
 
-            borderColor = new Pen(ColorTranslator.FromHtml("#393E51"));
+            borderColor = new Pen(ColorTranslator.FromHtml("#3C3F50"));
             BackColor = ColorTranslator.FromHtml("#2B3043");
 
             Text = null;

@@ -29,7 +29,7 @@ namespace XRails.Controls
             UpdateStyles();
 
             ForeColor = ColorTranslator.FromHtml("#FAFAFA");
-            BackColor = ColorTranslator.FromHtml("#292C3B");
+            BackColor = ColorTranslator.FromHtml("#292C3D");
 
             BorderStyle = BorderStyle.None;
             Dock = DockStyle.Fill;

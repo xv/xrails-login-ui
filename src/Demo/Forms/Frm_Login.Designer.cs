@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            AnimatorNS.Animation animation6 = new AnimatorNS.Animation();
+            AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Login));
+            this.Animator = new AnimatorNS.Animator(this.components);
             this.XR_Container = new XRails.Controls.XRails_Container();
             this.XR_RightPanel = new XRails.Controls.XRails_RightPanel();
+            this.XR_Button_Login = new XRails.Controls.XRails_Button();
+            this.XR_Label_LoggingIn = new XRails.Controls.XRails_Label();
             this.XR_TitleLabel_LoginTo = new XRails.Controls.XRails_TitleLabel();
             this.XR_TextBox_Pass = new XRails.Controls.XRails_TextBox();
             this.XR_TextBox_User = new XRails.Controls.XRails_TextBox();
@@ -40,19 +43,37 @@
             this.XR_Label_Contact = new XRails.Controls.XRails_Label();
             this.XR_Label_Support = new XRails.Controls.XRails_Label();
             this.XR_LinkLabel_ForgotPass = new XRails.Controls.XRails_LinkLabel();
-            this.XR_Button_Login = new XRails.Controls.XRails_Button();
             this.XR_LeftPanel = new XRails.Controls.XRails_LeftPanel();
             this.XR_TitleLabel_Welcome = new XRails.Controls.XRails_TitleLabel();
             this.PB_Logo = new System.Windows.Forms.PictureBox();
             this.XR_LogoBox = new XRails.Controls.XRails_LogoBox();
             this.XR_ControlBox = new XRails.Controls.XRails_ControlBox();
-            this.XR_Label_LoggingIn = new XRails.Controls.XRails_Label();
-            this.Animator = new AnimatorNS.Animator(this.components);
             this.XR_Container.SuspendLayout();
             this.XR_RightPanel.SuspendLayout();
             this.XR_LeftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Logo)).BeginInit();
             this.SuspendLayout();
+            // 
+            // Animator
+            // 
+            this.Animator.AnimationType = AnimatorNS.AnimationType.Custom;
+            this.Animator.Cursor = null;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.Animator.DefaultAnimation = animation1;
             // 
             // XR_Container
             // 
@@ -76,7 +97,7 @@
             // 
             // XR_RightPanel
             // 
-            this.XR_RightPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(59)))));
+            this.XR_RightPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(61)))));
             this.XR_RightPanel.Controls.Add(this.XR_Button_Login);
             this.XR_RightPanel.Controls.Add(this.XR_Label_LoggingIn);
             this.XR_RightPanel.Controls.Add(this.XR_TitleLabel_LoginTo);
@@ -94,6 +115,39 @@
             this.XR_RightPanel.Name = "XR_RightPanel";
             this.XR_RightPanel.Size = new System.Drawing.Size(350, 484);
             this.XR_RightPanel.TabIndex = 2;
+            // 
+            // XR_Button_Login
+            // 
+            this.XR_Button_Login.BackColor = System.Drawing.Color.Transparent;
+            this.Animator.SetDecoration(this.XR_Button_Login, AnimatorNS.DecorationType.None);
+            this.XR_Button_Login.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.XR_Button_Login.Enabled = false;
+            this.XR_Button_Login.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.XR_Button_Login.Location = new System.Drawing.Point(-7, 317);
+            this.XR_Button_Login.MinimumSize = new System.Drawing.Size(144, 47);
+            this.XR_Button_Login.Name = "XR_Button_Login";
+            this.XR_Button_Login.Radius = 20;
+            this.XR_Button_Login.Size = new System.Drawing.Size(144, 47);
+            this.XR_Button_Login.TabIndex = 0;
+            this.XR_Button_Login.Text = "LOGIN";
+            this.XR_Button_Login.Click += new System.EventHandler(this.XR_Button_Login_Click);
+            // 
+            // XR_Label_LoggingIn
+            // 
+            this.XR_Label_LoggingIn.BackColor = System.Drawing.Color.Transparent;
+            this.XR_Label_LoggingIn.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.Animator.SetDecoration(this.XR_Label_LoggingIn, AnimatorNS.DecorationType.None);
+            this.XR_Label_LoggingIn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.XR_Label_LoggingIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(118)))), ((int)(((byte)(127)))));
+            this.XR_Label_LoggingIn.Image = ((System.Drawing.Image)(resources.GetObject("XR_Label_LoggingIn.Image")));
+            this.XR_Label_LoggingIn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.XR_Label_LoggingIn.Location = new System.Drawing.Point(17, 329);
+            this.XR_Label_LoggingIn.Name = "XR_Label_LoggingIn";
+            this.XR_Label_LoggingIn.Size = new System.Drawing.Size(96, 22);
+            this.XR_Label_LoggingIn.TabIndex = 8;
+            this.XR_Label_LoggingIn.Text = "Logging in...";
+            this.XR_Label_LoggingIn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.XR_Label_LoggingIn.Visible = false;
             // 
             // XR_TitleLabel_LoginTo
             // 
@@ -229,22 +283,6 @@
             this.XR_LinkLabel_ForgotPass.Visible = false;
             this.XR_LinkLabel_ForgotPass.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(89)))), ((int)(((byte)(84)))));
             // 
-            // XR_Button_Login
-            // 
-            this.XR_Button_Login.BackColor = System.Drawing.Color.Transparent;
-            this.Animator.SetDecoration(this.XR_Button_Login, AnimatorNS.DecorationType.None);
-            this.XR_Button_Login.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.XR_Button_Login.Enabled = false;
-            this.XR_Button_Login.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.XR_Button_Login.Location = new System.Drawing.Point(-7, 317);
-            this.XR_Button_Login.MinimumSize = new System.Drawing.Size(144, 47);
-            this.XR_Button_Login.Name = "XR_Button_Login";
-            this.XR_Button_Login.Radius = 20;
-            this.XR_Button_Login.Size = new System.Drawing.Size(144, 47);
-            this.XR_Button_Login.TabIndex = 0;
-            this.XR_Button_Login.Text = "LOGIN";
-            this.XR_Button_Login.Click += new System.EventHandler(this.XR_Button_Login_Click);
-            // 
             // XR_LeftPanel
             // 
             this.XR_LeftPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(93)))), ((int)(((byte)(89)))));
@@ -313,44 +351,6 @@
             this.XR_ControlBox.Name = "XR_ControlBox";
             this.XR_ControlBox.Size = new System.Drawing.Size(139, 31);
             this.XR_ControlBox.TabIndex = 0;
-            // 
-            // XR_Label_LoggingIn
-            // 
-            this.XR_Label_LoggingIn.BackColor = System.Drawing.Color.Transparent;
-            this.XR_Label_LoggingIn.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.Animator.SetDecoration(this.XR_Label_LoggingIn, AnimatorNS.DecorationType.None);
-            this.XR_Label_LoggingIn.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.XR_Label_LoggingIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(118)))), ((int)(((byte)(127)))));
-            this.XR_Label_LoggingIn.Image = ((System.Drawing.Image)(resources.GetObject("XR_Label_LoggingIn.Image")));
-            this.XR_Label_LoggingIn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.XR_Label_LoggingIn.Location = new System.Drawing.Point(17, 329);
-            this.XR_Label_LoggingIn.Name = "XR_Label_LoggingIn";
-            this.XR_Label_LoggingIn.Size = new System.Drawing.Size(96, 22);
-            this.XR_Label_LoggingIn.TabIndex = 8;
-            this.XR_Label_LoggingIn.Text = "Logging in...";
-            this.XR_Label_LoggingIn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.XR_Label_LoggingIn.Visible = false;
-            // 
-            // Animator
-            // 
-            this.Animator.AnimationType = AnimatorNS.AnimationType.Custom;
-            this.Animator.Cursor = null;
-            animation6.AnimateOnlyDifferences = true;
-            animation6.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.BlindCoeff")));
-            animation6.LeafCoeff = 0F;
-            animation6.MaxTime = 1F;
-            animation6.MinTime = 0F;
-            animation6.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.MosaicCoeff")));
-            animation6.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation6.MosaicShift")));
-            animation6.MosaicSize = 0;
-            animation6.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            animation6.RotateCoeff = 0F;
-            animation6.RotateLimit = 0F;
-            animation6.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.ScaleCoeff")));
-            animation6.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.SlideCoeff")));
-            animation6.TimeCoeff = 0F;
-            animation6.TransparencyCoeff = 0F;
-            this.Animator.DefaultAnimation = animation6;
             // 
             // Frm_Login
             // 
