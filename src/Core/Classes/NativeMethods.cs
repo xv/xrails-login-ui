@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System;
 
-namespace XRails.Classses
+namespace XRails.Classes
 {
     internal static class NativeMethods
     {

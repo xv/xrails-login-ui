@@ -15,7 +15,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing;
 using System.Windows.Forms;
 using System;
-using XRails.Classses;
+using XRails.Classes;
 
 namespace XRails.Controls
 {

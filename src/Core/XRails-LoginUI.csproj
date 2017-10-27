@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classses\NativeMethods.cs" />
+    <Compile Include="Classes\NativeMethods.cs" />
     <Compile Include="Controls\XRails_Button.cs">
       <SubType>Component</SubType>
     </Compile>
