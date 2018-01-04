@@ -47,6 +47,19 @@ The core project compiles into a single dynamic link library. Meaning that once 
 
 This process does not reference XRrails to your project. Once any of its control is placed on a form, it will be automatically referenced.
 
+## Hacky
+Ok, look. If you saw the screenshot above closely, you have probably noticed the alien window frame. That right -- it is a custom as well. But how?
+
+There are two controls that make up the custom window frame: `XRails_Container` and `XRails_ControlBox`. The Container control, once placed, will override the form's `FormBorderStyle` property by settings it to None. That alone is not sufficient. The ControlBox control is also needed here. It is basically the Minimize, Maximize, and Close buttons. Once placed, it will automatically adjust location.
+
+Any drawbacks? Absolutely. Natively speaking, when you set `FormBorderStyle = FormBorderStyle.None;`, Windows will disable many things, and that includes: ability to resize form, drop shadow, and DWM form animations.
+
+Any workarounds? Sure -- although not entirely. Form resizing during runtime can be easily coded and implemented in `XRails_Container`, but the functionality is not needed for a project like this. Thus, it is not a problem here. However, it is hacky when it comes to drop shadow. You will need to override `CreateParams` to modify the parameters of the form and `WndProc` to intercept window messages.
+As for DWM animations (eg. minimize/maximize/restore), going borderless makes it near impossible to achieve. I have yet to discover a solution for that. However, I did create a simple fade in/out animation for the form when the application is launched or closed.
+I highly recommend you have a look at the demo project form to see how everything is done.
+
+Keep in mind that `XRails_Container` is optional! You do not have to override the default window frame. It was made purely to unify the look of the application on any Windows version.
+
 Contact Author
 -------
 [Email me your love letters](mailto:xviyy@aol.com)
