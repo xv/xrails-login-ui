@@ -29,7 +29,7 @@ namespace XRails.Controls
         private bool hoverButton;
 
         private int mouseState;
-        private Rectangle R1;
+        private Rectangle stringRect;
         private readonly StringFormat stringFormat;
 
         #endregion
@@ -247,9 +247,7 @@ namespace XRails.Controls
         protected override void OnResize(EventArgs e)
         {
             if (Width > 0 && Height > 0)
-            {
-                R1 = new Rectangle(0, 0, Width, Height);
-            }
+                stringRect = new Rectangle(0, 0, Width, Height);
 
             Invalidate();
             base.OnResize(e);
@@ -337,7 +335,7 @@ namespace XRails.Controls
                     using (var brush = new SolidBrush(ColorTranslator.FromHtml("#F25D59")))
                     {
                         g.DrawPath(pen, path);
-                        g.DrawString(Text, Font, brush, R1, stringFormat);
+                        g.DrawString(Text, Font, brush, stringRect, stringFormat);
                     }
                     break;
                 case 1: // Pressed state
@@ -345,7 +343,7 @@ namespace XRails.Controls
                     using (var brush = new SolidBrush(ColorTranslator.FromHtml("#FFFFFF")))
                     {
                         g.DrawPath(pen, path);
-                        g.DrawString(Text, Font, brush, R1, stringFormat);
+                        g.DrawString(Text, Font, brush, stringRect, stringFormat);
                     }
                     break;
                 case 3: // Hover state
@@ -353,7 +351,7 @@ namespace XRails.Controls
                     using (var brush = new SolidBrush(Color.FromArgb(80 + stringGlow, Color.White)))
                     {
                         g.DrawPath(pen, path);
-                        g.DrawString(Text, Font, brush, R1, stringFormat);
+                        g.DrawString(Text, Font, brush, stringRect, stringFormat);
 
                     }
                     break;
