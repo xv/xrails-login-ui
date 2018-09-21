@@ -23,9 +23,7 @@ namespace XRails.Controls
 
         private readonly Color linkColor       = ColorTranslator.FromHtml("#F25D59");
         private readonly Color activeLinkColor = ColorTranslator.FromHtml("#DE5954");
-
-        private const int IDC_HAND = 32649;
-        private static readonly Cursor NativeHand = new Cursor(NativeMethods.LoadCursor(IntPtr.Zero, IDC_HAND));
+        private readonly Cursor NativeHand;
 
         #endregion
 
@@ -38,6 +36,8 @@ namespace XRails.Controls
             VisitedLinkColor = activeLinkColor;
             LinkBehavior = LinkBehavior.NeverUnderline;
             Cursor = Cursors.Arrow;
+
+            NativeHand = new Cursor(NativeMethods.LoadCursor(IntPtr.Zero, NativeConstants.IDC_HAND));
         }
 
         protected override void OnMouseDown(MouseEventArgs e)

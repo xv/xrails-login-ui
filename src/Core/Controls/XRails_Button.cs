@@ -32,9 +32,6 @@ namespace XRails.Controls
         private Rectangle R1;
         private readonly StringFormat stringFormat;
 
-        private const int WM_SETCURSOR = 0x0020;
-        private const int IDC_HAND = 32649;
-
         #endregion
         #region Properties
 
@@ -289,9 +286,9 @@ namespace XRails.Controls
 
         protected override void WndProc(ref Message msg)
         {
-            if (msg.Msg == WM_SETCURSOR)
+            if (msg.Msg == NativeConstants.WM_SETCURSOR)
             {
-                NativeMethods.SetCursor(NativeMethods.LoadCursor(IntPtr.Zero, IDC_HAND));
+                NativeMethods.SetCursor(NativeMethods.LoadCursor(IntPtr.Zero, NativeConstants.IDC_HAND));
                 msg.Result = IntPtr.Zero;
                 return;
             }

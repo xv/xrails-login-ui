@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\NativeConstants.cs" />
     <Compile Include="Classes\NativeMethods.cs" />
     <Compile Include="Controls\XRails_Button.cs">
       <SubType>Component</SubType>
