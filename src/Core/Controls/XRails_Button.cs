@@ -330,7 +330,8 @@ namespace XRails.Controls
             var path = RoundedRect(rect, _Radius, _Radius, false, true, true, false);
 
             // Fill the button with animation when the mouse is over the control
-            g.FillPath(new SolidBrush(Color.FromArgb(buttonGlow, Color.FromArgb(242, 93, 89))), path);
+            using (var animBrush = new SolidBrush(Color.FromArgb(buttonGlow, Color.FromArgb(242, 93, 89))))
+                g.FillPath(animBrush, path);
 
             switch (mouseState)
             {
