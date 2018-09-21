@@ -25,7 +25,7 @@ XRails_TitleLabel | Label
 
 > **Note**
 >
-> The control `XRails_TitleLabel` uses a user-defined font called `Raleway-Light`. Because the font will not be installed on the local machine, it needs to be initialized on the form that is using the label in order to load up. See the demo project for more information.
+> The control `XRails_TitleLabel` uses a user-defined font called `Raleway-Light`. Because the font will not be installed on the local machine, it needs to be loaded into memory during application runtime using the [PrivateFontCollection](https://docs.microsoft.com/en-us/windows/desktop/api/gdiplusheaders/nl-gdiplusheaders-privatefontcollection) class in order to be applied. See the demo project to find out how it's done.
 >
 > Raleway is an open source font developed by [impallari](https://github.com/impallari/Raleway/), and can be found on [Google Fonts](https://fonts.google.com/specimen/Raleway) as well.
 
@@ -43,14 +43,14 @@ The core project compiles into a single dynamic link library. Meaning that once 
 2. If not running the IDE as administrator, drag and drop the .dll on the newly created tab and the controls will be listed. Otherwise,
    1. Right-click on the new tab and select `Choose Items...`
    2. Press `Browse...` and navigate to the .dll file.
-   3. Press `OK` to confirm. The custom controls show now be listed.
+   3. Press `OK` to confirm. The custom controls should now be listed.
 
-This process does not reference XRrails to your project. Once any of its control is placed on a form, it will be automatically referenced.
+Once any of the controls is placed on a form, the library should be automatically referenced.
 
 ## Hacky
-Ok, look. If you saw the screenshot above closely, you have probably noticed the alien window frame. That right -- it is a custom as well. But how?
+Ok, look. If you saw the screenshot above closely, you have probably noticed the alien window frame. That right, it is a custom control as well. But how?
 
-There are two controls that make up the custom window frame: `XRails_Container` and `XRails_ControlBox`. The Container control, once placed, will override the form's `FormBorderStyle` property by setting it to None. That alone is not sufficient. The ControlBox control is also needed here. It is basically the Minimize, Maximize, and Close buttons. Once placed, it will automatically adjust location.
+There are two controls that make up the custom window frame: `XRails_Container` and `XRails_ControlBox`. The Container control, once placed, will override the form's `FormBorderStyle` property by setting it to None. That alone is not sufficient. The ControlBox control is also needed here. It basically acts as the Minimize, Maximize, and Close buttons. Once placed, it will automatically re-adjust location when the project is built or debugged.
 
 Any drawbacks? Absolutely. Natively speaking, when you set `FormBorderStyle = FormBorderStyle.None;`, Windows will disable many things, and that includes: ability to resize form, drop shadow, and DWM form animations.
 
@@ -59,12 +59,6 @@ What about a workaround? Sure -- although not entirely. Form resizing during run
 I highly recommend you have a look at the demo project form to see how everything is done.
 
 Keep in mind that `XRails_Container` is optional! You do not have to override the default window frame. It was made purely to unify the look of the application on any Windows version.
-
-Contact Author
--------
-[Email me your love letters](mailto:xviyy@aol.com)
-<br>
-[Tweet me maybe?](https://twitter.com/xviyy)
 
 Legal
 -----
