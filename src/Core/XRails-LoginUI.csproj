@@ -62,16 +62,13 @@
     <Compile Include="Controls\XRails_Label.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\XRails_LeftPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\XRails_LinkLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\XRails_LogoBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\XRails_RightPanel.cs">
+    <Compile Include="Controls\XRails_Panel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\XRails_TextBox.cs">

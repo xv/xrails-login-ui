@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
+            AnimatorNS.Animation animation2 = new AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Login));
             this.Animator = new AnimatorNS.Animator(this.components);
             this.XR_Container = new XRails.Controls.XRails_Container();
-            this.XR_RightPanel = new XRails.Controls.XRails_RightPanel();
+            this.XR_RightPanel = new XRails.Controls.XRails_Panel();
             this.XR_Button_Login = new XRails.Controls.XRails_Button();
             this.XR_Label_LoggingIn = new XRails.Controls.XRails_Label();
             this.XR_TitleLabel_LoginTo = new XRails.Controls.XRails_TitleLabel();
@@ -43,7 +43,7 @@
             this.XR_Label_Contact = new XRails.Controls.XRails_Label();
             this.XR_Label_Support = new XRails.Controls.XRails_Label();
             this.XR_LinkLabel_ForgotPass = new XRails.Controls.XRails_LinkLabel();
-            this.XR_LeftPanel = new XRails.Controls.XRails_LeftPanel();
+            this.XR_LeftPanel = new XRails.Controls.XRails_Panel();
             this.XR_TitleLabel_Welcome = new XRails.Controls.XRails_TitleLabel();
             this.PB_Logo = new System.Windows.Forms.PictureBox();
             this.XR_LogoBox = new XRails.Controls.XRails_LogoBox();
@@ -58,22 +58,22 @@
             // 
             this.Animator.AnimationType = AnimatorNS.AnimationType.Custom;
             this.Animator.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.Animator.DefaultAnimation = animation1;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.Animator.DefaultAnimation = animation2;
             // 
             // XR_Container
             // 
@@ -113,6 +113,7 @@
             this.XR_RightPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.XR_RightPanel.Location = new System.Drawing.Point(350, 31);
             this.XR_RightPanel.Name = "XR_RightPanel";
+            this.XR_RightPanel.Side = XRails.Controls.XRails_Panel.PanelSide.Right;
             this.XR_RightPanel.Size = new System.Drawing.Size(350, 484);
             this.XR_RightPanel.TabIndex = 2;
             // 
@@ -295,6 +296,7 @@
             this.XR_LeftPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.XR_LeftPanel.Location = new System.Drawing.Point(0, 31);
             this.XR_LeftPanel.Name = "XR_LeftPanel";
+            this.XR_LeftPanel.Side = XRails.Controls.XRails_Panel.PanelSide.Left;
             this.XR_LeftPanel.Size = new System.Drawing.Size(350, 484);
             this.XR_LeftPanel.TabIndex = 1;
             // 
@@ -384,8 +386,8 @@
 
         private XRails.Controls.XRails_Container XR_Container;
         private XRails.Controls.XRails_ControlBox XR_ControlBox;
-        private XRails.Controls.XRails_LeftPanel XR_LeftPanel;
-        private XRails.Controls.XRails_RightPanel XR_RightPanel;
+        private XRails.Controls.XRails_Panel XR_LeftPanel;
+        private XRails.Controls.XRails_Panel XR_RightPanel;
         private XRails.Controls.XRails_LogoBox XR_LogoBox;
         private System.Windows.Forms.PictureBox PB_Logo;
         private XRails.Controls.XRails_Button XR_Button_Login;
