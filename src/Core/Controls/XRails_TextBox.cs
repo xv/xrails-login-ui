@@ -11,7 +11,6 @@
 */
 
 using System.ComponentModel;
-using System.Drawing.Drawing2D;
 using System.Drawing;
 using System.Windows.Forms;
 using System;
@@ -23,23 +22,16 @@ namespace XRails.Controls
     {
         #region Fields
 
-        internal TextBox XRailsTB = new TextBox();
-
-        private Pen borderColor;
-        private Panel _WatermarkContainer;
-        private SolidBrush _WatermarkBrush;
+        private TextBox tbCtrl = new TextBox();
+        private Color borderColor;
+        private Panel watermarkContainer;
 
         #endregion
         #region Properties
 
-        private bool _ColorBordersOnEnter = true;
         [Browsable(true)]
         [Description("Decides whether the top and bottom border lines are recolored on Enter event.")]
-        public bool ColorBordersOnEnter
-        {
-            get { return _ColorBordersOnEnter;  }
-            set { _ColorBordersOnEnter = value; }
-        }
+        public bool ColorBordersOnEnter { get; set; } = true;
 
         private Image _Image;
         [Browsable(true)]
@@ -50,18 +42,14 @@ namespace XRails.Controls
             set
             {
                 _Image = value;
-                _ImageSize = value == null ? Size.Empty : value.Size;
-                XRailsTB.Location = new Point(24, 14);
+                ImageSize = value == null ? Size.Empty : value.Size;
+                tbCtrl.Location = new Point(24, 14);
 
                 Invalidate();
             }
         }
 
-        private Size _ImageSize;
-        protected Size ImageSize
-        {
-            get { return _ImageSize; }
-        }
+        protected Size ImageSize { get; private set; }
 
         private int _MaxLength = 32767;
         [Browsable(true)]
@@ -72,7 +60,7 @@ namespace XRails.Controls
             set
             {
                 _MaxLength = value;
-                XRailsTB.MaxLength = MaxLength;
+                tbCtrl.MaxLength = MaxLength;
                 Invalidate();
             }
         }
@@ -86,13 +74,13 @@ namespace XRails.Controls
             set
             {
                 _Multiline = value;
-                if (XRailsTB != null)
+                if (tbCtrl != null)
                 {
-                    XRailsTB.Multiline = value;
+                    tbCtrl.Multiline = value;
                     if (value)
-                        XRailsTB.Height = Height - 10;
+                        tbCtrl.Height = Height - 10;
                     else
-                        Height = XRailsTB.Height + 10;
+                        Height = tbCtrl.Height + 10;
                 }
             }
         }
@@ -106,8 +94,8 @@ namespace XRails.Controls
             set
             {
                 _ReadOnly = value;
-                if (XRailsTB != null)
-                    XRailsTB.ReadOnly = value;
+                if (tbCtrl != null)
+                    tbCtrl.ReadOnly = value;
             }
         }
 
@@ -120,7 +108,7 @@ namespace XRails.Controls
             set
             {
                 _ShortcutsEnabled = value;
-                XRailsTB.ShortcutsEnabled = value;
+                tbCtrl.ShortcutsEnabled = value;
             }
         }
 
@@ -159,6 +147,7 @@ namespace XRails.Controls
             set
             {
                 _TextAlignment = value;
+                tbCtrl.TextAlign = _TextAlignment;
                 Invalidate();
             }
         }
@@ -172,7 +161,7 @@ namespace XRails.Controls
             set
             {
                 _UseSystemPasswordChar = value;
-                XRailsTB.UseSystemPasswordChar = UseSystemPasswordChar;
+                tbCtrl.UseSystemPasswordChar = UseSystemPasswordChar;
                 Invalidate();
             }
         }
@@ -190,7 +179,7 @@ namespace XRails.Controls
             }
         }
 
-        private Color  _WatermarkColor;
+        private Color _WatermarkColor;
         [Browsable(true)]
         [Description("Allows adding a watermark to the TextBox field when it is empty.")]
         public Color WatermarkColor
@@ -206,19 +195,17 @@ namespace XRails.Controls
         #endregion
         #region EventArgs
 
-        private void _Click(object sender, EventArgs e)
+        private void TextBox_Click(object sender, EventArgs e)
         {
             OnClick(e);
         }
 
-        private void _Enter(object sender, EventArgs e)
+        private void TextBox_Enter(object sender, EventArgs e)
         {
-            if (_ColorBordersOnEnter)
-                borderColor = new Pen(ColorTranslator.FromHtml("#F25D59"));
+            if (ColorBordersOnEnter)
+                borderColor = ColorTranslator.FromHtml("#F25D59");
 
-            _WatermarkBrush = new SolidBrush(_WatermarkColor);
-
-            if (XRailsTB.TextLength <= 0)
+            if (tbCtrl.TextLength <= 0)
             {
                 RemoveWatermark();
                 DrawWatermark();
@@ -227,14 +214,12 @@ namespace XRails.Controls
             Invalidate();
         }
 
-        private void _Leave(object sender, EventArgs e)
+        private void TextBox_Leave(object sender, EventArgs e)
         {
-            if (_ColorBordersOnEnter)
-                borderColor = new Pen(ColorTranslator.FromHtml("#3C3F50"));
+            if (ColorBordersOnEnter)
+                borderColor = ColorTranslator.FromHtml("#3C3F50");
 
-            _WatermarkBrush = new SolidBrush(_WatermarkColor);
-
-            if (XRailsTB.TextLength <= 0)
+            if (tbCtrl.TextLength <= 0)
                 RemoveWatermark();
             else
                 Invalidate();
@@ -242,62 +227,71 @@ namespace XRails.Controls
             Invalidate();
         }
 
-        private void _KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.A)
             {
-                XRailsTB.SelectAll();
+                tbCtrl.SelectAll();
                 e.SuppressKeyPress = true;
             }
             
             if (e.Control && e.KeyCode == Keys.C)
             {
-                XRailsTB.Copy();
+                tbCtrl.Copy();
                 e.SuppressKeyPress = true;
             }
 
             OnKeyDown(e);
         }
 
-        private void _KeyUp(object sender, KeyEventArgs e)
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
             OnKeyUp(e);
         }
 
-        private void _KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             OnKeyPress(e);
         }
 
+        public void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            Text = tbCtrl.Text;
+
+            if (tbCtrl.TextLength > 0)
+                RemoveWatermark();
+            else
+                DrawWatermark();
+        }
+
         private void WatermarkContainer_Click(object sender, EventArgs e)
         {
-            XRailsTB.Focus();
+            tbCtrl.Focus();
         }
 
         private void WatermarkContainer_Paint(object sender, PaintEventArgs e)
         {
             // X has to be >=1, otherwise the cursor won't show
-            _WatermarkContainer.Location = new Point(1, -1);
-            _WatermarkContainer.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            _WatermarkContainer.Width = XRailsTB.Width - 25;
-            _WatermarkContainer.Height = XRailsTB.Height;
+            watermarkContainer.Location = new Point(1, -1);
+            watermarkContainer.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            watermarkContainer.Width = tbCtrl.Width - 25;
+            watermarkContainer.Height = tbCtrl.Height;
 
-            _WatermarkBrush = new SolidBrush(_WatermarkColor);
-            e.Graphics.DrawString(_Watermark, Font, _WatermarkBrush, new PointF(-3.0F, 1.0F));
+            using (var watermark = new SolidBrush(_WatermarkColor))
+                e.Graphics.DrawString(_Watermark, Font, watermark, new PointF(-3.0f, 1.0f));
         }
 
         protected override void OnFontChanged(EventArgs e)
         {
             base.OnFontChanged(e);
-
-            XRailsTB.Font = Font;
+            tbCtrl.Font = Font;
         }
 
         protected override void OnForeColorChanged(EventArgs e)
         {
             base.OnForeColorChanged(e);
 
-            XRailsTB.ForeColor = ForeColor;
+            tbCtrl.ForeColor = ForeColor;
             Invalidate();
         }
 
@@ -305,7 +299,7 @@ namespace XRails.Controls
         {
             base.OnGotFocus(e);
 
-            XRailsTB.Focus();
+            tbCtrl.Focus();
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -317,156 +311,158 @@ namespace XRails.Controls
         {
             base.OnResize(e);
 
-            if (_Multiline) { XRailsTB.Height = Height - 30; }
-            else            { Height = XRailsTB.Height + 32; }
+            if (_Multiline)
+                tbCtrl.Height = Height - 30;
+            else
+                Height = tbCtrl.Height + 32;
         }
 
         protected override void OnTextChanged(EventArgs e)
         {
             base.OnTextChanged(e);
-
-            XRailsTB.Text = Text;
+            tbCtrl.Text = Text;
         }
 
         protected override void OnInvalidated(InvalidateEventArgs e)
         {
             base.OnInvalidated(e);
 
-            if (_WatermarkContainer != null)
-                _WatermarkContainer.Invalidate();
+            if (watermarkContainer != null)
+                watermarkContainer.Invalidate();
         }
 
         #endregion
 
         public XRails_TextBox()
         {
-            SetStyle(ControlStyles.SupportsTransparentBackColor |
-                     ControlStyles.AllPaintingInWmPaint         |
-                     ControlStyles.OptimizedDoubleBuffer        |
+            SetStyle(ControlStyles.AllPaintingInWmPaint |
+                     ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.UserPaint, true);
 
             DoubleBuffered = true;
 
-            _WatermarkColor = ColorTranslator.FromHtml ("#747881");
-            _WatermarkBrush = new SolidBrush(_WatermarkColor);
-            _WatermarkContainer = null;
+            _WatermarkColor = ColorTranslator.FromHtml("#747881");
+            watermarkContainer = null;
 
             AddTextBox();
-            Controls.Add(XRailsTB);
             DrawWatermark();
 
-            borderColor = new Pen(ColorTranslator.FromHtml("#3C3F50"));
+            borderColor = ColorTranslator.FromHtml("#3C3F50");
             BackColor = ColorTranslator.FromHtml("#2B3043");
 
-            Text = null;
+            Text = string.Empty;
             Font = new Font("Segoe UI", 10);
             Size = new Size(145, 49);
         }
 
+        /// <summary>
+        /// Adds an actual <see cref="TextBox"/> control to this control.
+        /// </summary>
         private void AddTextBox()
         {
-            XRailsTB.Size = new Size(Width - 10, 49);
-            XRailsTB.Location = new Point(24, 14);
-            XRailsTB.Text = string.Empty;
-            XRailsTB.BorderStyle = BorderStyle.None;
-            XRailsTB.TextAlign = HorizontalAlignment.Left;
-            XRailsTB.Font = new Font("Segoe UI", 10);
-            XRailsTB.UseSystemPasswordChar = UseSystemPasswordChar;
-            XRailsTB.ShortcutsEnabled = ShortcutsEnabled;
-            XRailsTB.Multiline = false;
-            XRailsTB.BackColor = ColorTranslator.FromHtml("#2B3043");
+            tbCtrl.Size = new Size(Width - 10, 49);
+            tbCtrl.Location = new Point(24, 14);
+            tbCtrl.BorderStyle = BorderStyle.None;
+            tbCtrl.TextAlign = HorizontalAlignment.Left;
+            tbCtrl.Font = new Font("Segoe UI", 10);
+            tbCtrl.UseSystemPasswordChar = _UseSystemPasswordChar;
+            tbCtrl.ShortcutsEnabled = _ShortcutsEnabled;
+            tbCtrl.Multiline = false;
+            tbCtrl.BackColor = ColorTranslator.FromHtml("#2B3043");
 
             ForeColor = ColorTranslator.FromHtml("#7F838C");
 
-            // Event handlers
-            XRailsTB.TextChanged += _TextChanged;
-            XRailsTB.KeyDown     += _KeyDown;
-            XRailsTB.KeyPress    += _KeyPress;
-            XRailsTB.KeyUp       += _KeyUp;
-            XRailsTB.Click       += _Click;
-            XRailsTB.Enter       += _Enter;
-            XRailsTB.Leave       += _Leave;
+            tbCtrl.TextChanged += TextBox_TextChanged;
+            tbCtrl.KeyDown += TextBox_KeyDown;
+            tbCtrl.KeyPress += TextBox_KeyPress;
+            tbCtrl.KeyUp += TextBox_KeyUp;
+            tbCtrl.Click += TextBox_Click;
+            tbCtrl.Enter += TextBox_Enter;
+            tbCtrl.Leave += TextBox_Leave;
+
+            Controls.Add(tbCtrl);
         }
 
+        /// <summary>
+        /// Adds a watermark container.
+        /// </summary>
         private void DrawWatermark()
         {
-            if (_WatermarkContainer != null || XRailsTB.TextLength > 0)
+            if (watermarkContainer != null || tbCtrl.TextLength > 0)
                 return;
             
-            _WatermarkContainer = new Panel();
-            _WatermarkContainer.Paint += WatermarkContainer_Paint;
-            _WatermarkContainer.Invalidate();
-            _WatermarkContainer.Click += WatermarkContainer_Click;
-
-            XRailsTB.Controls.Add(_WatermarkContainer);
+            watermarkContainer = new Panel();
+            watermarkContainer.Paint += WatermarkContainer_Paint;
+            watermarkContainer.Click += WatermarkContainer_Click;
+            
+            tbCtrl.Controls.Add(watermarkContainer);
         }
 
+        /// <summary>
+        /// Removes the watermark container.
+        /// </summary>
         private void RemoveWatermark()
         {
-            if (_WatermarkContainer == null)
+            if (watermarkContainer == null)
                 return;
             
-            XRailsTB.Controls.Remove(_WatermarkContainer);
-            _WatermarkContainer = null;
+            tbCtrl.Controls.Remove(watermarkContainer);
+            watermarkContainer = null;
         }
 
-        public void _TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Draws the borders of the contorl.
+        /// </summary>
+        /// 
+        /// <param name="g">Reference to the Graphics class.</param>
+        private void DrawBorder(Graphics g)
         {
-            Text = XRailsTB.Text;
+            using (var border = new Pen(borderColor))
+            {
+                // Top border
+                if (_ShowTopBorder)
+                {
+                    g.DrawLine(border, 0, 0, Width - 1, 0);
+                    g.DrawLine(border, 0, 1, Width - 1, 1);
+                }
 
-            if (XRailsTB.TextLength > 0)
-                RemoveWatermark();
+                // Bottom border
+                if (_ShowBottomBorder)
+                {
+                    g.DrawLine(border, 0, Height - 2, Width - 1, Height - 2);
+                    g.DrawLine(border, 0, Height - 1, Width - 1, Height - 1);
+                }
+            }
+        }
+
+        /// <summary>
+        /// If the <see cref="Image"/> property value is specified, the image
+        /// will be drawn.
+        /// /// </summary>
+        /// 
+        /// <param name="g">Reference to the Graphics class.</param>
+        private void DrawImage(Graphics g)
+        {
+            if (Image == null)
+                tbCtrl.Width = Width - 35;
             else
-                DrawWatermark();
-        }
+            {
+                tbCtrl.Location = new Point(48, tbCtrl.Location.Y);
+                tbCtrl.Width = Width - 59;
 
-        public void _BaseTextChanged(object sender, EventArgs e)
-        {
-            XRailsTB.Text = Text;
+                g.DrawImage(_Image, 23, 14, 16, 16);
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
-
-            var bitmap = new Bitmap(Width, Height);
-            var g = Graphics.FromImage(bitmap);
+            var g = e.Graphics;
 
             DrawWatermark();
-            g.SmoothingMode = SmoothingMode.None;
+            DrawBorder(g);
+            DrawImage(g);
 
-            if (Image == null)
-                XRailsTB.Width = Width - 35;
-            else
-            {
-                XRailsTB.Location = new Point(48, XRailsTB.Location.Y);
-                XRailsTB.Width = Width - 59;
-            }
-
-            XRailsTB.TextAlign = TextAlignment;
-            XRailsTB.UseSystemPasswordChar = UseSystemPasswordChar;
-
-            // Top border
-            if (_ShowTopBorder)
-            {
-                g.DrawLine(borderColor, 0, 0, Width - 1, 0);
-                g.DrawLine(borderColor, 0, 1, Width - 1, 1);
-            }
-
-            // Bottom border
-            if (_ShowBottomBorder)
-            {
-                g.DrawLine(borderColor, 0, Height - 2, Width - 1, Height - 2);
-                g.DrawLine(borderColor, 0, Height - 1, Width - 1, Height - 1);
-            }
-
-            if (Image != null)
-                g.DrawImage(_Image, 23, 14, 16, 16);
-
-            e.Graphics.DrawImage((Image)bitmap.Clone(), 0, 0);
-
-            bitmap.Dispose();
-            g.Dispose();
+            base.OnPaint(e);
         }
     }
 }

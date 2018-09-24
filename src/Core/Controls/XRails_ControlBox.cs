@@ -222,9 +222,10 @@ namespace XRails.Controls
             var btnBackgroundSize = new Size(46, Height);
 
             // Minimize button
-            var minimizeBtnFont  = new Font("Tahoma", 12);
+            var minimizeBtnFont = new Font("Tahoma", 12);
             var minimizeBtnPoint = new Point(15, 5);
-            var minimizeBtnBrush = new SolidBrush(_EnableMinimize ? ColorTranslator.FromHtml("#A0A0A0") : ColorTranslator.FromHtml("#696969"));
+            var minimizeBtnBrush = new SolidBrush(_EnableMinimize ? ColorTranslator.FromHtml("#A0A0A0") : 
+                                                                    ColorTranslator.FromHtml("#696969"));
 
             if (hover_min && _EnableMinimize)
             {
@@ -236,11 +237,13 @@ namespace XRails.Controls
 
             g.DrawString("\u2212", minimizeBtnFont, minimizeBtnBrush, minimizeBtnPoint);
             minimizeBtnBrush.Dispose();
+            minimizeBtnFont.Dispose();
 
             // Maxmize button
-            var maximizeBtnFont  = new Font("Marlett", 9);
+            var maximizeBtnFont = new Font("Marlett", 9);
             var maximizeBtnPoint = new Point(63, 10);
-            var maximizeBtnBrush = new SolidBrush(_EnableMaximize ? ColorTranslator.FromHtml("#A0A0A0") : ColorTranslator.FromHtml("#696969"));
+            var maximizeBtnBrush = new SolidBrush(_EnableMaximize ? ColorTranslator.FromHtml("#A0A0A0") : 
+                                                                    ColorTranslator.FromHtml("#696969"));
 
             if (hover_max && _EnableMaximize)
             {
@@ -250,11 +253,14 @@ namespace XRails.Controls
                 maximizeBtnBrush = new SolidBrush(Color.White);
             }
 
-            g.DrawString(FindForm().WindowState != FormWindowState.Maximized ? "1" : "2", maximizeBtnFont, maximizeBtnBrush, maximizeBtnPoint);
+            g.DrawString(FindForm().WindowState != FormWindowState.Maximized ? "1" : "2", 
+                         maximizeBtnFont, maximizeBtnBrush, maximizeBtnPoint);
+
             maximizeBtnBrush.Dispose();
+            maximizeBtnFont.Dispose();
 
             // Close button
-            var closeBtnFont  = new Font("Tahoma", 11);
+            var closeBtnFont = new Font("Tahoma", 11);
             var closeBtnPoint = new Point(107, 6);
             var closeBtnBrush = new SolidBrush(ColorTranslator.FromHtml("#A0A0A0"));
 
@@ -268,7 +274,8 @@ namespace XRails.Controls
 
             g.DrawString("\u2A09", closeBtnFont, closeBtnBrush, closeBtnPoint);
             closeBtnBrush.Dispose();
-            
+            closeBtnFont.Dispose();
+
             base.OnPaint(e);
         }
     }

@@ -26,8 +26,7 @@ namespace XRails.Controls
         private Point mouseLocation;
 
         private Rectangle titleBarRect;
-        private int titleBar_stringLeft;
-        private Rectangle titleBar_stringRect;
+        private int titleBarStringLeft;
 
         #endregion
         #region Enumerations
@@ -108,7 +107,7 @@ namespace XRails.Controls
         /// <summary>
         /// Returns true if the mouse is over the title bar icon.
         /// </summary>
-        private static bool IsOverTitleBarIcon(MouseEventArgs e)
+        private bool IsOverTitleBarIcon(MouseEventArgs e)
         {
             var point = (e.X > 8 && e.X < 26) && (e.Y > 6 && e.Y < 22);
             return point;
@@ -178,7 +177,7 @@ namespace XRails.Controls
         public XRails_Container()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint |
-                     ControlStyles.UserPaint            |
+                     ControlStyles.UserPaint |
                      ControlStyles.ResizeRedraw, true);
 
             DoubleBuffered = true;
@@ -202,64 +201,91 @@ namespace XRails.Controls
             ParentForm.MaximumSize = Screen.FromRectangle(ParentForm.Bounds).WorkingArea.Size;
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        /// <summary>
+        /// Draws the title bar.
+        /// </summary>
+        /// 
+        /// <param name="g">Reference to the Graphics class.</param>
+        private void DrawTitleBar(Graphics g)
         {
-            var g = e.Graphics;
-            g.Clear(SystemColors.Control);
-
-            // Draw the title bar
             using (var brush = new SolidBrush(ColorTranslator.FromHtml("#323A3D")))
                 g.FillRectangle(brush, new Rectangle(0, 0, Width, 31));
+               
+            // ========== FOR TESTING PURPOSES ONLY! ==========
+            // PLACEMENT BACKGROUNDS FOR THE CONTROLBOX BUTTONS
+            // ================================================
+//          using (var brush = new SolidBrush(ColorTranslator.FromHtml("#FF0000")))
+//              g.FillRectangle(brush, new Rectangle(Width - 46, 0, 46, 31));
+//          
+//          using (var brush = new SolidBrush(ColorTranslator.FromHtml("#00FF00")))
+//              g.FillRectangle(brush, new Rectangle(Width - 92, 0, 46, 31));
+//          
+//          using (var brush = new SolidBrush(ColorTranslator.FromHtml("#0000FF")))
+//              g.FillRectangle(brush, new Rectangle(Width - 138, 0, 46, 31));
+        }
 
-            /*  ========== FOR TESTING PURPOSES ONLY! ==========
-            **  PLACEMENT BACKGROUNDS FOR THE CONTROLBOX BUTTONS
-            **  ================================================
-            **  using (var brush = new SolidBrush(ColorTranslator.FromHtml("#FF0000")))
-            **      g.FillRectangle(brush, new Rectangle(Width - 46, 0, 46, 31));
-            **
-            **  using (var brush = new SolidBrush(ColorTranslator.FromHtml("#00FF00")))
-            **      g.FillRectangle(brush, new Rectangle(Width - 92, 0, 46, 31));
-            **
-            **  using (var brush = new SolidBrush(ColorTranslator.FromHtml("#0000FF")))
-            **      g.FillRectangle(brush, new Rectangle(Width - 138, 0, 46, 31));
-            */
-            
-            // A 16x16 icon like the native window title bar
-            if (DrawIcon)
+        /// <summary>
+        /// Draws a 16x16 icon like the native window title bar.
+        /// </summary>
+        /// 
+        /// <param name="g">Reference to the Graphics class.</param>
+        private void DrawTitleBarIcon(Graphics g)
+        {
+            if (_DrawIcon)
             {
-                titleBar_stringLeft = TextAlignment == Alignment.Left ? 33 : 5;
-                g.DrawIcon(FindForm().Icon, new Rectangle(10, 7, 16, 16));
+                titleBarStringLeft = _TextAlignment == Alignment.Left ? 33 : 5;
+                var iconRect = new Rectangle(10, 7, 16, 16);
+
+                g.DrawIcon(FindForm().Icon, iconRect);
             }
             else
-                titleBar_stringLeft = 5;
+                titleBarStringLeft = 5;
+        }
 
-            titleBar_stringRect = new Rectangle(titleBar_stringLeft, 7, Width - 13, Height);
+        /// <summary>
+        /// Draws the text set in the Text property.
+        /// </summary>
+        /// 
+        /// <param name="g">Reference to the Graphics class.</param>
+        private void DrawTitleBarText(Graphics g)
+        {
+            var stringRect = new Rectangle(titleBarStringLeft, 7, Width - 13, Height);
 
-            switch (TextAlignment)
+            switch (_TextAlignment)
             {
                 case Alignment.Left:
                     using (var stringColor = new SolidBrush(_TitleBarTextColor))
                     using (var sf = new StringFormat
-                    { 
-                        Alignment     = StringAlignment.Near,
+                    {
+                        Alignment = StringAlignment.Near,
                         LineAlignment = StringAlignment.Near
                     })
                     {
-                        g.DrawString(Text, Font, stringColor, titleBar_stringRect, sf);
+                        g.DrawString(Text, Font, stringColor, stringRect, sf);
                     }
                     break;
                 case Alignment.Center:
                     using (var stringColor = new SolidBrush(_TitleBarTextColor))
                     using (var sf = new StringFormat
-                    { 
-                        Alignment     = StringAlignment.Center,
+                    {
+                        Alignment = StringAlignment.Center,
                         LineAlignment = StringAlignment.Near
                     })
                     {
-                        g.DrawString(Text, Font, stringColor, titleBar_stringRect, sf);
+                        g.DrawString(Text, Font, stringColor, stringRect, sf);
                     }
                     break;
             }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            g.Clear(SystemColors.Control);
+
+            DrawTitleBar(g);
+            DrawTitleBarIcon(g);
+            DrawTitleBarText(g);
 
             base.OnPaint(e);
         }

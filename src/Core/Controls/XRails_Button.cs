@@ -29,24 +29,18 @@ namespace XRails.Controls
         private bool hoverButton;
 
         private int mouseState;
+
+        private float margin, width, height;
         private Rectangle stringRect;
-        private readonly StringFormat stringFormat;
+        private RectangleF buttonRect;
+        private GraphicsPath roundRectPath;
 
         #endregion
         #region Properties
 
-        private Color _ForeColor = ColorTranslator.FromHtml("#F25D59");
-        [Browsable(true)]
+        [Browsable(false)]
         [Description("The foreground color of this component, which is used to display text.")]
-        public override Color ForeColor
-        {
-            get { return _ForeColor; }
-            set
-            {
-                _ForeColor = value;
-                Invalidate();
-            }
-        }
+        public override Color ForeColor { get; set; }
 
         private int _Radius = 20;
         [Browsable(true)]
@@ -119,11 +113,11 @@ namespace XRails.Controls
 
         #endregion
         #region Create Round Rectangle
-        
+
         // Snippet by RodStephens
-        private static GraphicsPath RoundedRect(RectangleF rect, float x_radius, float y_radius,
-                                                                 bool round_upperLeft,  bool round_upperRight,
-                                                                 bool round_lowerRight, bool round_lowerLeft)
+        private GraphicsPath RoundedRect(RectangleF rect, float x_radius, float y_radius,
+                                                          bool round_upperLeft, bool round_upperRight,
+                                                          bool round_lowerRight, bool round_lowerLeft)
         {
             PointF point1, point2;
             var path = new GraphicsPath();
@@ -253,50 +247,11 @@ namespace XRails.Controls
             base.OnResize(e);
         }
 
-        #endregion
-
-        public XRails_Button()
+        private void OnAnimation(object sender, EventArgs e)
         {
-            SetStyle(ControlStyles.AllPaintingInWmPaint         |
-                     ControlStyles.OptimizedDoubleBuffer        |
-                     ControlStyles.ResizeRedraw                 |
-                     ControlStyles.SupportsTransparentBackColor |
-                     ControlStyles.UserPaint, true);
-
-            BackColor = Color.Transparent;
-            DoubleBuffered = true;
-            Font = new Font("Segoe UI", 10);
-            ForeColor = ColorTranslator.FromHtml("#F25D59");
-            Size = new Size(144, 47);
-            MinimumSize = new Size(144, 47);
-            
-            stringFormat = new StringFormat
-            { 
-                Alignment = StringAlignment.Center,
-                LineAlignment = StringAlignment.Center
-            };
-
-            animationTimer = new Timer { Interval = 1 };
-            animationTimer.Tick += Animation;
-        }
-
-        #region Native hand cursor
-
-        protected override void WndProc(ref Message msg)
-        {
-            if (msg.Msg == NativeConstants.WM_SETCURSOR)
-            {
-                NativeMethods.SetCursor(NativeMethods.LoadCursor(IntPtr.Zero, NativeConstants.IDC_HAND));
-                msg.Result = IntPtr.Zero;
+            if (DesignMode)
                 return;
-            }
-            base.WndProc(ref msg);
-        }
 
-        #endregion
-
-        private void Animation(object sender, EventArgs e)
-        {
             if (hoverButton)
             {
                 if (buttonGlow < 242) { buttonGlow += 15; }
@@ -307,55 +262,116 @@ namespace XRails.Controls
                 if (buttonGlow >= 15) { buttonGlow -= 15; }
                 if (stringGlow >= 15) { stringGlow -= 15; }
             }
+
             Invalidate();
+        }
+
+        #endregion
+
+        public XRails_Button()
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint |
+                     ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw |
+                     ControlStyles.SupportsTransparentBackColor |
+                     ControlStyles.UserPaint, true);
+
+            BackColor = Color.Transparent;
+            DoubleBuffered = true;
+            Font = new Font("Segoe UI", 10);
+            ForeColor = ColorTranslator.FromHtml("#F25D59");
+            Size = new Size(144, 47);
+            MinimumSize = new Size(144, 47);
+
+            animationTimer = new Timer { Interval = 1 };
+            animationTimer.Tick += OnAnimation;
+        }
+
+        #region Native hand cursor
+
+        protected override void WndProc(ref Message msg)
+        {
+            if (msg.Msg == NativeConstants.WM_SETCURSOR)
+            {
+                var cursor = NativeMethods.LoadCursor(IntPtr.Zero, NativeConstants.IDC_HAND);
+                NativeMethods.SetCursor(cursor);
+
+                msg.Result = IntPtr.Zero;
+                return;
+            }
+            base.WndProc(ref msg);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Fills the button with a color fade-in animation when the mouse is
+        /// over the control.
+        /// </summary>
+        /// 
+        /// <param name="g">Reference to the Graphics class.</param>
+        private void FillButton(Graphics g)
+        {
+            using (var animBrush = new SolidBrush(Color.FromArgb(buttonGlow, ForeColor)))
+                g.FillPath(animBrush, roundRectPath);
+        }
+
+        /// <summary>
+        /// Draws the button path and the string from the 
+        /// <see cref="Control.Text"/> property.
+        /// </summary>
+        /// 
+        /// <param name="g">Reference to the Graphics class.</param>
+        private void DrawButton(Graphics g)
+        {
+            var penColor = Color.Empty;
+            var brushColor = Color.Empty;
+
+            switch (mouseState)
+            {
+                case 0: // Inactive state
+                    penColor = ForeColor;
+                    brushColor = ForeColor;
+                    break;
+                case 1: // Pressed state
+                    penColor = ForeColor;
+                    brushColor = Color.White;
+                    break;
+                case 3: // Hover state
+                    penColor = ForeColor;
+                    brushColor = Color.FromArgb(80 + stringGlow, Color.White);
+                    break;
+            }
+
+            using (var pathPen = new Pen(penColor, 2f))
+            using (var stringBrush = new SolidBrush(brushColor))
+            using (var sf = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            })
+            {
+                g.DrawPath(pathPen, roundRectPath);
+                g.DrawString(Text, Font, stringBrush, stringRect, sf);
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
-            g.SmoothingMode     = SmoothingMode.AntiAlias;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.PixelOffsetMode   = PixelOffsetMode.HighQuality;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-            const float margin = 3;
-            float width  = ClientSize.Width - 2 * margin;
-            float height = ClientSize.Height - 6;
+            margin = 3;
+            width = ClientSize.Width - 2 * margin;
+            height = ClientSize.Height - 6;
 
-            var rect = new RectangleF(margin, margin, width, height);
-            var path = RoundedRect(rect, _Radius, _Radius, false, true, true, false);
+            buttonRect = new RectangleF(margin, margin, width, height);
+            roundRectPath = RoundedRect(buttonRect, _Radius, _Radius, false, true, true, false);
 
-            // Fill the button with animation when the mouse is over the control
-            using (var animBrush = new SolidBrush(Color.FromArgb(buttonGlow, Color.FromArgb(242, 93, 89))))
-                g.FillPath(animBrush, path);
-
-            switch (mouseState)
-            {
-                case 0: // Inactive state
-                    using (var pen = new Pen(ColorTranslator.FromHtml("#F25D59"), 2.0F))
-                    using (var brush = new SolidBrush(ColorTranslator.FromHtml("#F25D59")))
-                    {
-                        g.DrawPath(pen, path);
-                        g.DrawString(Text, Font, brush, stringRect, stringFormat);
-                    }
-                    break;
-                case 1: // Pressed state
-                    using (var pen = new Pen(ColorTranslator.FromHtml("#F25D59"), 2.0F))
-                    using (var brush = new SolidBrush(ColorTranslator.FromHtml("#FFFFFF")))
-                    {
-                        g.DrawPath(pen, path);
-                        g.DrawString(Text, Font, brush, stringRect, stringFormat);
-                    }
-                    break;
-                case 3: // Hover state
-                    using (var pen = new Pen(ColorTranslator.FromHtml("#F25D59"), 2.0F))
-                    using (var brush = new SolidBrush(Color.FromArgb(80 + stringGlow, Color.White)))
-                    {
-                        g.DrawPath(pen, path);
-                        g.DrawString(Text, Font, brush, stringRect, stringFormat);
-
-                    }
-                    break;
-            }
+            FillButton(g);
+            DrawButton(g);
 
             base.OnPaint(e);
         }
