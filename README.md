@@ -12,16 +12,15 @@ Controls
 ------------------
 Control           | Inherits        
 ------------------|---------
-XRails_Button     | Control          
-XRails_Container  | ContainerControl 
-XRails_ControlBox | Control          
-XRails_Label      | Label            
-XRails_LeftPanel  | Panel            
-XRails_LinkLabel  | LinkLabel        
-XRails_LogoBox    | Control          
-XRails_RightPanel | Panel            
-XRails_TextBox    | Control          
-XRails_TitleLabel | Label            
+XRails_Button     | Control
+XRails_Container  | ContainerControl
+XRails_ControlBox | Control
+XRails_Label      | Label
+XRails_LinkLabel  | LinkLabel
+XRails_LogoBox    | Control
+XRails_Panel      | Panel
+XRails_TextBox    | Control
+XRails_TitleLabel | Label
 
 > **Note**
 >
