@@ -187,7 +187,7 @@ namespace XRails_LoginUI.Demo
                 // WS_MINIMIZEBOX   : allows minimizing the software from the taskbar
                 // WS_EX_COMPOSITED : paints bottom-to-top. Reduces flicker greatly
 
-                cp.Style = cp.Style | WS_MINIMIZEBOX;
+                cp.Style |= WS_MINIMIZEBOX;
                 cp.ExStyle |= WS_EX_COMPOSITED;
 
                 return cp;
